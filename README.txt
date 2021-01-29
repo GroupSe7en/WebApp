@@ -1,0 +1,10 @@
+#useraccounts
+admin@webapp.com    admin321
+student1@uom.lk     admin321
+student2@uom.lk     admin321
+student3@uom.lk     admin321
+lecturer1@uom.lk    admin321
+lecturer2@uom.lk    admin321
+
+#required libraries
+pip install django-crispy-forms

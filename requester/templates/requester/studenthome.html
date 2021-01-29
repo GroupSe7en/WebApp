@@ -1,0 +1,14 @@
+{% extends "requester/base.html" %}
+{% block content %}
+
+    <h1>Home page of students</h1>
+
+    {% for request in StudentRequests %}
+        {% if request.author|stringformat:"s" == user.username|stringformat:"s" %}
+            <h1>{{ request.title }}</h1>
+            <p>{{ request.author }} on {{request.date_posted}}</p>
+            <p>{{ request.content }}</p>
+        {% endif %}
+    {% endfor %}
+
+{% endblock content %}
