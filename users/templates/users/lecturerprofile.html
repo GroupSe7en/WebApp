@@ -1,0 +1,14 @@
+{% extends "requester/base.html" %}
+
+{% block content %}
+    <div class="content-section">
+        <div class="media">
+            <img class="rounded-circle account-img" src="{{ user.lecturerprofile.image.url }}">
+            <div class="media-body">
+                <h2 class="account-heading">{{ user.email }}</h2>
+                <!-- <p class="text-secondary">username@gmail.com</p> -->
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}
