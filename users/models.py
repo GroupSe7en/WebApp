@@ -49,7 +49,19 @@ class CustomUser(AbstractUser):
         return self.email
 
 class Profile(models.Model):
+    
+    firstName = models.CharField(max_length=50)
+    lastName = models.CharField(max_length=50)
+   
+    image = models.ImageField(default='defaultDP.jpg', upload_to='profile_pics')
 
+    def __str__(self):
+        return f'{self.user.email} Profile'
+
+    class Meta:
+        abstract = True
+
+class StudentProfile(Profile):
     DEPARTMENT_CHOICES = [
     ('EN', 'ENTC'),
     ('CS', 'CSE'),
@@ -62,19 +74,8 @@ class Profile(models.Model):
     ]
 
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
-    firstName = models.CharField(max_length=50)
-    lastName = models.CharField(max_length=50)
-    department = models.CharField(max_length=2, choices=DEPARTMENT_CHOICES)
-    image = models.ImageField(default='defaultDP.jpg', upload_to='profile_pics')
-
-    def __str__(self):
-        return f'{self.user.email} Profile'
-
-    class Meta:
-        abstract = True
-
-class StudentProfile(Profile):
     indexNo = models.CharField(max_length=7)
+    department = models.CharField(max_length=2, choices=DEPARTMENT_CHOICES)
     contactNo = models.CharField(max_length=10)
 
 class LecturerProfile(Profile):
@@ -90,4 +91,5 @@ class LecturerProfile(Profile):
     ('MA', 'MA')
     ]
 
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
     department = models.CharField(max_length=2, choices=DEPARTMENT_CHOICES)
