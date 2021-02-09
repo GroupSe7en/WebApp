@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.base_user import BaseUserManager
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.models import AbstractUser, PermissionsMixin
+from PIL import Image
 
 
 class CustomUserManager(BaseUserManager):
@@ -57,6 +58,14 @@ class Profile(models.Model):
 
     def __str__(self):
         return f'{self.user.email} Profile'
+
+    def save(self):
+        super().save()
+        img = Image.open(self.image.path)
+        if img.height > 300 or img.width > 300:
+            output_size = (300, 300)
+            img.thumbnail(output_size)
+            img.save(self.image.path)
 
     class Meta:
         abstract = True
