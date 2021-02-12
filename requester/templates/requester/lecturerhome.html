@@ -5,9 +5,16 @@
 
     {% for request in StudentRequests %}
       <div class="container bg-light border rounded m-3 mx-auto">
-        <h1 class="lh-1">{{ request.title }}</h1>
-        <p class="fw-light fst-italic lh-1">from {{ request.author }} on {{request.date_posted}}</p>
-        <!-- <p>{{ request.content }}</p> -->
+        <h3 class="lh-1">{{ request.title }}</h3>
+        <p class="fw-light fst-italic lh-1">from {{ request.author }} on {{request.date_posted}}
+          {% if request.accept_status == 'PN' %}
+            <span class="badge rounded-pill bg-secondary">Pending</span>
+          {% elif request.accept_status == 'AC' %}
+            <span class="badge rounded-pill bg-success">Accepted</span>
+          {% else %}
+            <span class="badge rounded-pill bg-danger">Rejected</span>
+          {% endif %}
+        </p>
       </div>    
     {% endfor %}
 
