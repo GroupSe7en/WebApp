@@ -4,3 +4,37 @@ venv
 __pycache__
 env
 db.sqlite3
+	WebApp/__pycache__/__init__.cpython-39.pyc
+	WebApp/__pycache__/settings.cpython-39.pyc
+	WebApp/__pycache__/urls.cpython-39.pyc
+	WebApp/__pycache__/wsgi.cpython-39.pyc
+	requester/__pycache__/__init__.cpython-39.pyc
+	requester/__pycache__/admin.cpython-39.pyc
+	requester/__pycache__/apps.cpython-39.pyc
+	requester/__pycache__/models.cpython-39.pyc
+	requester/__pycache__/urls.cpython-39.pyc
+	requester/__pycache__/views.cpython-39.pyc
+	requester/migrations/__pycache__/0001_initial.cpython-39.pyc
+	requester/migrations/__pycache__/0002_auto_20210212_1226.cpython-39.pyc
+	requester/migrations/__pycache__/0003_auto_20210212_1235.cpython-39.pyc
+	requester/migrations/__pycache__/0004_auto_20210212_1236.cpython-39.pyc
+	requester/migrations/__pycache__/0005_auto_20210212_1248.cpython-39.pyc
+	requester/migrations/__pycache__/__init__.cpython-39.pyc
+	users/__pycache__/__init__.cpython-39.pyc
+	users/__pycache__/admin.cpython-39.pyc
+	users/__pycache__/apps.cpython-39.pyc
+	users/__pycache__/forms.cpython-39.pyc
+	users/__pycache__/models.cpython-39.pyc
+	users/__pycache__/signals.cpython-39.pyc
+	users/__pycache__/views.cpython-39.pyc
+	users/migrations/__pycache__/0001_initial.cpython-39.pyc
+	users/migrations/__pycache__/0002_profile.cpython-39.pyc
+	users/migrations/__pycache__/0003_auto_20210205_2158.cpython-39.pyc
+	users/migrations/__pycache__/0004_auto_20210206_1148.cpython-39.pyc
+	users/migrations/__pycache__/0005_auto_20210206_1201.cpython-39.pyc
+	users/migrations/__pycache__/0006_auto_20210206_1202.cpython-39.pyc
+	users/migrations/__pycache__/0007_auto_20210206_1204.cpython-39.pyc
+	users/migrations/__pycache__/0008_remove_studentprofile_user.cpython-39.pyc
+	users/migrations/__pycache__/0009_delete_studentprofile.cpython-39.pyc
+	users/migrations/__pycache__/0010_studentprofile.cpython-39.pyc
+	users/migrations/__pycache__/__init__.cpython-39.pyc
