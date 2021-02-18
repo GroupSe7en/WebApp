@@ -1,0 +1,12 @@
+                            <fieldset class="form-group">
+                                <legend class="border-bottom mb-4">LOGIN</legend>
+                                    <div id="div_id_username" class="form-group"> 
+                                        <label for="id_username" class=" requiredField">Email address<span class="asteriskField">*</span> </label> 
+                                    <div class=""> <input type="text" name="username" autofocus="" autocapitalize="none" autocomplete="username" maxlength="254" class="textinput textInput form-control" required="" id="id_username"> </div> 
+                                    </div> 
+                                    <div id="div_id_password" class="form-group"> 
+                                        <label for="id_password" class=" requiredField">Password<span class="asteriskField">*</span> </label> 
+                                    <div class=""> 
+                                        <input type="password" name="password" autocomplete="current-password" class="textinput textInput form-control" required="" id="id_password"> </div> 
+                                    </div>
+                            </fieldset>
