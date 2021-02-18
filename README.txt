@@ -8,4 +8,4 @@ lecturer2@uom.lk    admin321
 
 #required libraries
 pip install django-crispy-forms
-pip install pillow
+pip install pillow 
