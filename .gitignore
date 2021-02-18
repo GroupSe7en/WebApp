@@ -1,6 +1,17 @@
 Pipfile
 .vscode
 venv
+<<<<<<< HEAD
 env
 _pycache_
 
+=======
+<<<<<<< HEAD
+__pycache__
+db.sqlite3
+=======
+env
+_pycache_
+
+>>>>>>> adb23f375db149bf1d1641b32a527bcf2c291545
+>>>>>>> bdc34b140c56e57e416c6bbe347f7a3272412754
