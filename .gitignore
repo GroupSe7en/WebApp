@@ -1,3 +1,6 @@
 Pipfile
 .vscode
 venv
+env
+_pycache_
+
