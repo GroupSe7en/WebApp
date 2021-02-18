@@ -2,20 +2,15 @@
 {% load crispy_forms_tags %}
 {% block content %}
 <head>
-<!--
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-Include the above in your HEAD tag ---------->
+
 <style>
-       
 @import url('https://fonts.googleapis.com/css?family=Mukta');
 body{
   font-family: 'Mukta', sans-serif;
 	height:100vh;
 	min-height:550px;
     background-color:yellow;
-	background-image: url(https://pixabay.com/images/id-690088/);
+	background-image: url(https://cdn.pocket-lint.com/r/s/970x/assets/images/151442-cameras-feature-stunning-photos-from-the-national-sony-world-photography-awards-2020-image1-evuxphd3mr-jpg.webp?v1);
 	background-repeat: no-repeat;
 	background-size:cover;
 	background-position:center;
@@ -163,8 +158,6 @@ a{
   text-decoration:none;
   color:#2c7715;
 }
-    
-    
 </style>
 
 <script> 
@@ -199,7 +192,7 @@ $('.login-reg-panel input[type="radio"]').on('change', function() {
 </head>
 
 <div class="login-reg-panel">
-		<!--<div class="login-info-box">
+		<<div class="login-info-box">
 			<h2>Have an account?</h2>
 			<p>Lorem ipsum dolor sit amet</p>
 			<label id="label-register" for="log-reg-show">Login</label>
@@ -211,7 +204,7 @@ $('.login-reg-panel input[type="radio"]').on('change', function() {
 			<p>go below and register</p>
 			<label id="label-login" for="log-login-show">Register</label>
 			<input type="radio" name="active-log-panel" id="log-login-show">
-		</div>-->
+		</div>>
 							
 		<div class="white-panel">
 			<div class="login-show">
@@ -220,6 +213,14 @@ $('.login-reg-panel input[type="radio"]').on('change', function() {
 				<input type="password" placeholder="Password">
 				<input type="button" value="Login">
 				<a href="">Forgot password?</a>
+			</div>
+        
+        <div class="register-show">
+				<h2>REGISTER</h2>
+				<input type="text" placeholder="Email">
+				<input type="password" placeholder="Password">
+				<input type="password" placeholder="Confirm Password">
+				<input type="button" value="Register">
 			</div>
 			<!--can add register code here-->
 		</div>
@@ -241,12 +242,4 @@ $('.login-reg-panel input[type="radio"]').on('change', function() {
 -->
 {% endblock content %}
 
-<!--
-    <div class="register-show">
-				<h2>REGISTER</h2>
-				<input type="text" placeholder="Email">
-				<input type="password" placeholder="Password">
-				<input type="password" placeholder="Confirm Password">
-				<input type="button" value="Register">
-			</div>
--->
+
