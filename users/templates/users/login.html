@@ -161,18 +161,12 @@ $('.login-reg-panel input[type="radio"]').on('change', function() {
     {% if messages %}
       <div class="alert alert-success" role="alert">
       {% for message in messages %}
-          <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
       {% endfor %}
       </div>
     {% endif %}
+
     <div class="login-reg-panel">
-            <div class="login-info-box">
-                <h1>WEBAPP</h1>
-                <h7>by group SE7EN</h7>
-                <p></p>
-                <p>app for university bla bla blaa.....</p>
-            </div>
-         
             <div class="white-panel">
                 <div class="content-section">
                     <form method="POST">
@@ -186,8 +180,23 @@ $('.login-reg-panel input[type="radio"]').on('change', function() {
                         </div>
                     </form>
                 </div>
+            
             </div>
-        </div>
+    </div>
+    <!-- 
+        
+        <div class="content-section">
+            <form method="POST">
+                {% csrf_token %}
+                <fieldset class="form-group">
+                    <legend class="border-bottom mb-4">Log In</legend>
+                    {{ form|crispy }}
+                </fieldset>
+                <div class="form-group mt-3">
+                    <button class="btn btn-outline-info" type="submit">Sign In</button>
+                </div>
+            </form>
+        </div> -->
     </body>
 </html>
 
