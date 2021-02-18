@@ -1,4 +1,4 @@
-<fieldset class="form-group">
+                            <fieldset class="form-group">
                                 <legend class="border-bottom mb-4">LOGIN</legend>
                                     <div id="div_id_username" class="form-group"> 
                                         <label for="id_username" class=" requiredField">Email address<span class="asteriskField">*</span> </label> 
