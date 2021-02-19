@@ -30,6 +30,13 @@ body {
     margin-top: -85px;
 }
 
+  #navbar .nav{
+    margin-top: 120px;
+    max-width: 600px;
+    height: 320px;
+    border: 1px solid #9C9C9C;
+    background-color: #EAEAEA;
+  }
 </style>
 </head>
 <body>
@@ -43,9 +50,10 @@ body {
   {% endif %}
 
   <div id="login">
-    <h3 class="text-center text-white pt-5"> WebApp </h3>
+    <h1 class="text-center text-white pt-5"> WebApp </h1>
     <div class="fadeIn first">
       </div>
+    
     <div class="container">
         <div id="login-row" class="row justify-content-center align-items-center">
             <div id="login-column" class="col-md-6">
@@ -63,12 +71,9 @@ body {
                         </div>
                         <div class="form-group">
                             <input type="submit" name="Login" class="btn btn-info btn-md" value="Login">
-                            <span style="width:60%; text-align:right;  display: inline-block;"><a class="small-text" href="#">Forgot
+                            <span style="width:80%; text-align:right;  display: inline-block;"><a class="small-text" href="#">Forgot
                                 password?</a></span>
                             </div>
-                        </div>
-                        <div>
-                            
                         </div>
                     </form>
                 </div>
@@ -76,6 +81,21 @@ body {
         </div>
     </div>
 </div>
+
+
+<footer id = navbar class="nav justify-content-end">
+    <li class="nav-item bg-light">
+      <a class="nav-link active" aria-current="page" href="#">Help</a>
+    </li>
+    <li class="nav-item bg-light">
+      <a class="nav-link" href="#">Contact Us</a>
+    </li>
+    <li class="nav-item bg-light">
+      <a class="nav-link" href="#">Language</a>
+    </li>
+  </footer>
+
+
 </body>
 </html>
 
