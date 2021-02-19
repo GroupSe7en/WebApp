@@ -34,27 +34,35 @@
           </div>
         </div>
   
+        <br>
+        <br>
         <div class="container">
           <!-- Example row of columns -->
           
           <div class="row">
             {% for request in StudentRequests %}
-            <div class="col-md-4">
-              <h2>Heading</h2>
-              <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-              <p><a class="btn btn-secondary" href="#" role="button">View details »</a></p>
+            <div class="container bg-light border rounded m-3 mx-auto">
+              <h3 class="lh-1">{{ request.title }}</h3>
+                  <p class="fw-light fst-italic lh-1">from {{ request.author }} on {{request.date_posted}}
+                  {% if request.accept_status == 'PN' %}
+                    <span class="badge rounded-pill bg-secondary">Pending</span>
+                  {% elif request.accept_status == 'AC' %}
+                    <span class="badge rounded-pill bg-success">Accepted</span>
+                  {% else %}
+                    <span class="badge rounded-pill bg-danger">Rejected</span>
+                  {% endif %}
+            </div--> 
+            <p><a class="btn btn-secondary" href="#" role="button">View details »</a></p>
             </div>
             {% endfor %}
           </div>
           <hr>
-  
         </div> 
   
       </main>
   
-      <footer class="container">
-        <p>© Company 2017-2018</p>
-      </footer>
+      <br>
+  
 
       
       <!--div class="container bg-light border rounded m-3 mx-auto">
