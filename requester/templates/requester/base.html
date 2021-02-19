@@ -30,14 +30,29 @@
       </div>
     {% endif %}
 
-    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-sm navbar-light bg-light">
+      <a class="navbar-brand" href="#">
+        <img src="https://utilitypeopleuk.com/wp-content/uploads/2017/06/twitter-icon-circle-blue-logo-preview.png" width="30" height="30" alt="">
+      </a>
       <div class="container-fluid">
-        <a class="navbar-brand" href="#">Requester</a>
+        <a class="navbar-brand" href="#">User Name</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <ul class="nav justify-content-end">
+            <li class="nav-item">
+              <a class="nav-link" href="/requester/home/">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/logout/">Log Out</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/profile" tabindex="-1" aria-disabled="true">Profile</a>
+            </li>
+          </ul>
+
+          <!--ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
               <a class="nav-link" href="/requester/home/">Home</a>
             </li>
@@ -50,7 +65,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/profile" tabindex="-1" aria-disabled="true">Profile</a>
             </li>
-          </ul>
+          </ul-->
         </div>
       </div>
     </nav>

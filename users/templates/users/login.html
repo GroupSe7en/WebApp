@@ -1,8 +1,11 @@
 {% load crispy_forms_tags %}
 <!doctype html>
 <html lang="en">
-<head>
+    <link rel="shortcut icon" href="https://freepngimg.com/thumb/logo/62837-instagram-icons-photography-computer-logo-icon.png" />
+    <title> SE7EN </title>
 
+    <head>
+   
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -12,7 +15,7 @@ body {
     padding: 0;
     background-color: #17a2b8;
     height: 100vh;
-  }
+}
   #login .container #login-row #login-column #login-box {
     margin-top: 120px;
     max-width: 600px;
@@ -25,7 +28,16 @@ body {
   }
   #login .container #login-row #login-column #login-box #login-form #register-link {
     margin-top: -85px;
-  }</style>
+}
+
+  #navbar .nav{
+    margin-top: 120px;
+    max-width: 600px;
+    height: 320px;
+    border: 1px solid #9C9C9C;
+    background-color: #EAEAEA;
+  }
+</style>
 </head>
 <body>
 
@@ -38,14 +50,17 @@ body {
   {% endif %}
 
   <div id="login">
-    <h3 class="text-center text-white pt-5">Login form</h3>
+    <h1 class="text-center text-white pt-5"> WebApp </h1>
+    <div class="fadeIn first">
+      </div>
+    
     <div class="container">
         <div id="login-row" class="row justify-content-center align-items-center">
             <div id="login-column" class="col-md-6">
                 <div id="login-box" class="col-md-12">
                     <form id="login-form" class="form" action="" method="post">
                         {% csrf_token %}
-                        <h3 class="text-center text-info">Login</h3>
+                        <h3 class="text-center text-info">Sign In</h3>
                         <div class="form-group">
                             <label for="username" class="text-info">Username:</label><br>
                             <input type="text" name="username" id="username" class="form-control">
@@ -55,7 +70,10 @@ body {
                             <input type="text" name="password" id="password" class="form-control">
                         </div>
                         <div class="form-group">
-                            <input type="submit" name="submit" class="btn btn-info btn-md" value="submit">
+                            <input type="submit" name="Login" class="btn btn-info btn-md" value="Login">
+                            <span style="width:80%; text-align:right;  display: inline-block;"><a class="small-text" href="#">Forgot
+                                password?</a></span>
+                            </div>
                         </div>
                     </form>
                 </div>
@@ -63,6 +81,21 @@ body {
         </div>
     </div>
 </div>
+
+
+<footer id = navbar class="nav justify-content-end">
+    <li class="nav-item bg-light">
+      <a class="nav-link active" aria-current="page" href="#">Help</a>
+    </li>
+    <li class="nav-item bg-light">
+      <a class="nav-link" href="#">Contact Us</a>
+    </li>
+    <li class="nav-item bg-light">
+      <a class="nav-link" href="#">Language</a>
+    </li>
+  </footer>
+
+
 </body>
 </html>
 

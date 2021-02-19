@@ -3,8 +3,61 @@
 
     <!-- <h1>Home page of lecturers</h1> -->
 
-    {% for request in StudentRequests %}
-      <div class="container bg-light border rounded m-3 mx-auto">
+
+    <html lang="en"><head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <meta name="description" content="">
+      <meta name="author" content="">
+      <link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico">
+  
+      <title>Jumbotron Template for Bootstrap</title>
+  
+      <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/jumbotron/">
+  
+      <!-- Bootstrap core CSS -->
+      <link href="../../dist/css/bootstrap.min.css" rel="stylesheet">
+  
+      <!-- Custom styles for this template -->
+      <link href="jumbotron.css" rel="stylesheet">
+    </head>
+  
+    <body data-new-gr-c-s-check-loaded="14.996.0" data-gr-ext-installed="">
+      <main role="main">
+  
+        <!-- Main jumbotron for a primary marketing message or call to action -->
+        <div class="jumbotron">
+          <div class="container">
+            <h1 class="display-3">Welcome Back!</h1>
+            <p>These are the request that has sent by the students for you. Please check them and respond. anything else bla bla blaa</p>
+            <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more »</a></p>
+          </div>
+        </div>
+  
+        <div class="container">
+          <!-- Example row of columns -->
+          
+          <div class="row">
+            {% for request in StudentRequests %}
+            <div class="col-md-4">
+              <h2>Heading</h2>
+              <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+              <p><a class="btn btn-secondary" href="#" role="button">View details »</a></p>
+            </div>
+            {% endfor %}
+          </div>
+          <hr>
+  
+        </div> 
+  
+      </main>
+  
+      <footer class="container">
+        <p>© Company 2017-2018</p>
+      </footer>
+
+      
+      <!--div class="container bg-light border rounded m-3 mx-auto">
         <h3 class="lh-1">{{ request.title }}</h3>
         <p class="fw-light fst-italic lh-1">from {{ request.author }} on {{request.date_posted}}
           {% if request.accept_status == 'PN' %}
@@ -15,7 +68,9 @@
             <span class="badge rounded-pill bg-danger">Rejected</span>
           {% endif %}
         </p>
-      </div>    
-    {% endfor %}
+      </div-->    
+   
+
+
 
 {% endblock content %}
