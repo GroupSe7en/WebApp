@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils import timezone
 from users.models import CustomUser
+from django.urls import reverse
 
 #model for request
 class StudentRequest(models.Model):
@@ -17,6 +18,7 @@ class StudentRequest(models.Model):
         ('AC', 'Accepted'),
         ('RJ', 'Rejected')
     ]
+
     requestType = models.CharField(max_length=2, choices=TYPE_CHOICES)
     title = models.CharField(max_length=100)
     content = models.TextField()
@@ -27,4 +29,7 @@ class StudentRequest(models.Model):
 
     def __str__(self):
         return self.title
+
+    def get_absolute_url(self):
+        return reverse('request-detail', kwargs={'pk': self.pk})
 
