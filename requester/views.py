@@ -1,6 +1,6 @@
-from django.shortcuts import render
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, redirect
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, View
+from django.contrib.auth.decorators import login_required, user_passes_test
 from .models import StudentRequest
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
@@ -92,3 +92,21 @@ class RequestDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     if (self.request.user == request.author):
       return True
     return False
+
+
+class RequestReviewView(LoginRequiredMixin, UserPassesTestMixin, View):
+
+  def test_func(self):
+    studentrequest = StudentRequest.objects.filter(id = self.kwargs['pk']).first()
+    if (self.request.user == studentrequest.reciever):
+      if (self.kwargs['review'] == 'accept'):
+        studentrequest.accept_status = 'AC'
+        studentrequest.save()
+      elif (self.kwargs['review'] == 'reject'):
+        studentrequest.accept_status = 'RJ'
+        studentrequest.save()
+      return True
+    return False
+
+  def get(self, request, *args, **kwargs):
+        return redirect('request-detail', pk = kwargs['pk'])

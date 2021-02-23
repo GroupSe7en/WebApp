@@ -16,7 +16,7 @@
             <span class="badge rounded-pill bg-danger">Rejected</span>
           {% endif %}
         </p>
-        <p>{{ object.content }}</p>
+        <p>{{ object.content|linebreaksbr }}</p>
         {% if object.author == user %}
           <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'request-delete' object.id %}">Delete</a>
         {% endif %}
