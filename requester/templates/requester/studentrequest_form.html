@@ -1,0 +1,19 @@
+{% extends "requester/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class='container'>
+    <div>
+        <form method="POST">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">New Request</legend>
+                {{ form|crispy }}
+            </fieldset>
+            <div>
+                <button class="btn btn-outline-info" type="submit">Submit</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock content %}
