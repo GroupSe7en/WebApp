@@ -46,7 +46,7 @@
                   {% else %}
                     <span class="badge rounded-pill bg-danger">Rejected</span>
                   {% endif %}
-            <p><a class="btn btn-secondary" href="{% url 'request-detail' request.id %}" role="button">View details »</a></p>
+            <p><a class="btn btn-outline-info" href="{% url 'request-detail' request.id %}" role="button">View details »</a></p>
             </div>
             {% endfor %}
           </div>

@@ -82,7 +82,7 @@ class StudentProfile(Profile):
     ('CE', 'CE')
     ]
 
-    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, related_name="studentprofile")
     indexNo = models.CharField(max_length=7)
     department = models.CharField(max_length=2, choices=DEPARTMENT_CHOICES)
     contactNo = models.CharField(max_length=10)
@@ -100,5 +100,5 @@ class LecturerProfile(Profile):
     ('MA', 'MA')
     ]
 
-    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, related_name="lecturerprofile")
     department = models.CharField(max_length=2, choices=DEPARTMENT_CHOICES)
