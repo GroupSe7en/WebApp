@@ -11,7 +11,6 @@ from .views import (
     AddReplyView)
 
 urlpatterns = [
-    path('home/', RequestListView.as_view(), name='requester-home'),#url to home page
     path('request/new/', RequestCreateView.as_view(), name='request-create'),#url to request create page
     path('request/<int:pk>/update/', RequestUpdateView.as_view(), name='request-update'),# url to request update page
     path('request/<int:pk>/delete/', RequestDeleteView.as_view(), name='request-delete'),# url to request update page
