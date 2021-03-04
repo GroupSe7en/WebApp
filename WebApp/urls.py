@@ -12,7 +12,15 @@ urlpatterns = [
     path('profile/', user_views.profile, name='profile'),
     path('requester/', include('requester.urls')),#adding requester app url config
     path('', RequestListView.as_view(), name='requester-home'),#url to home page
-    path('login/', auth_views.LoginView.as_view(template_name='users/login.html'), name='login')#login view route
+    path('login/', auth_views.LoginView.as_view(template_name='users/login.html'), name='login'),#login view route
+    path('password-reset/', auth_views.PasswordResetView.as_view(template_name='users/password_reset.html'), 
+        name='password_reset'),#password reset route
+    path('password-reset/done', auth_views.PasswordResetDoneView.as_view(template_name='users/password_reset_done.html'), 
+        name='password_reset_done'),#logout view route
+    path('password-reset-confirm/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(template_name='users/password_reset_confirm.html'),  
+        name='password_reset_confirm'),#password reset confirm view route
+    path('password-reset-complete/', auth_views.PasswordResetCompleteView.as_view(template_name='users/password_reset_complete.html'), 
+        name='password_reset_complete'),#password reset complete route
 ]
 
 if settings.DEBUG:
