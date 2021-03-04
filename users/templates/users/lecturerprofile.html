@@ -1,17 +1,8 @@
 {% extends "requester/base.html" %}
 {% load crispy_forms_tags %}
 
-
-{% block head %}
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-{% endblock %}
-
 {% block content %}
 <div class="container bootstrap snippet">
-
-    <div class="row">
-  		<div class="col-sm-10"><h1>{{user.lecturerprofile.firstName}} {{user.lecturerprofile.lastName}}</h1></div>
-    </div>
 
     <form class="form" method="post" enctype="multipart/form-data">
         {% csrf_token %}
@@ -19,6 +10,9 @@
             <div class="col-sm-3">
                 <div class="text-center">
                     <div class="form-group">
+                        <div class="row">
+                            <div class="col-sm-10 text-center"><h1>{{user.lecturerprofile.firstName}} {{user.lecturerprofile.lastName}}</h1></div>
+                        </div>
                         <img src="{{ user.lecturerprofile.image.url }}" class="avatar img-circle img-thumbnail" alt="avatar">
                         <h6>Upload a different photo...</h6>
                         <input type="file" name="image" class="text-center center-block file-upload form-control">
@@ -36,21 +30,25 @@
                         <div class="form-group">
                             <div class="col-xs-6">
                                 <label for="id_firstName"><h4>First name</h4></label>
-                                <input type="text" class="form-control" name="firstName" maxlength="50" value="{{ user.lecturerprofile.firstName }}" id="id_firstName">
+                                <input type="text" class="form-control" name="firstName" maxlength="50" value="{{ user.lecturerprofile.firstName }}" id="id_firstName" required>
                             </div>
+                        </div>
 
+                        <div class="form-group">
                             <div class="col-xs-6">
                                 <label for="id_lastName"><h4>Last name</h4></label>
-                                <input type="text" class="form-control" name="lastName" maxlength="50" value="{{ user.lecturerprofile.lastName }}" id="id_lastName">
+                                <input type="text" class="form-control" name="lastName" maxlength="50" value="{{ user.lecturerprofile.lastName }}" id="id_lastName" required>
                             </div>
+                        </div>
 
+                        <div class="form-group">
                             <div class="col-xs-6">
                                 <label for="id_department"><h4>Department</h4></label>
                                 <select name="department" class="select form-control" id="id_department">
-                                    <option value="{{ user.lecturerprofile.department }}">---------</option>
+                                    <option selected value="{{ user.lecturerprofile.department }}">Select your department</option>
                                     <option value="EN">ENTC</option>
                                     <option value="CS">CSE</option>
-                                    <option value="BM" selected="">BM</option>
+                                    <option value="BM" >BM</option>
                                     <option value="ME">ME</option>
                                     <option value="MT">MT</option>
                                     <option value="CH">CH</option>
@@ -62,12 +60,13 @@
                         </div>
 
                         <div class="form-group">
-                            <div class="col-xs-12">
-                                <br>
-                                <button class="btn btn-lg btn-success" type="submit">Update</button>
+                            <div class="form-group">
+                                <div class="col-xs-12">
+                                    <br>
+                                    <button class="btn btn-lg btn-success" type="submit">Update</button>
+                                </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>

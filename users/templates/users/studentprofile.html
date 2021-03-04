@@ -1,17 +1,8 @@
 {% extends "requester/base.html" %}
 {% load crispy_forms_tags %}
 
-
-{% block head %}
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-{% endblock %}
-
 {% block content %}
 <div class="container bootstrap snippet">
-
-    <div class="row">
-  		<div class="col-sm-10"><h1>{{user.studentprofile.firstName}} {{user.studentprofile.lastName}}</h1></div>
-    </div>
 
     <form class="form" method="post" enctype="multipart/form-data">
         {% csrf_token %}
@@ -19,6 +10,9 @@
             <div class="col-sm-3">
                 <div class="text-center">
                     <div class="form-group">
+                        <div class="row">
+                            <div class="col-sm-10"><h1>{{user.studentprofile.firstName}} {{user.studentprofile.lastName}}</h1></div>
+                        </div>
                         <img src="{{ user.studentprofile.image.url }}" class="avatar img-circle img-thumbnail" alt="avatar">
                         <h6>Upload a different photo...</h6>
                         <input type="file" name="image" class="text-center center-block file-upload form-control">
@@ -36,18 +30,22 @@
                         <div class="form-group">
                             <div class="col-xs-6">
                                 <label for="id_firstName"><h4>First name</h4></label>
-                                <input type="text" class="form-control" name="firstName" maxlength="50" id="id_firstName" value="{{ user.studentprofile.firstName }}">
+                                <input type="text" class="form-control" name="firstName" maxlength="50" id="id_firstName" value="{{ user.studentprofile.firstName }}" required>
                             </div>
+                        </div>  
 
+                        <div class="form-group">
                             <div class="col-xs-6">
                                 <label for="id_lastName"><h4>Last name</h4></label>
-                                <input type="text" class="form-control" name="lastName" maxlength="50" id="id_lastName" value="{{ user.studentprofile.lastName }}">
+                                <input type="text" class="form-control" name="lastName" maxlength="50" id="id_lastName" value="{{ user.studentprofile.lastName }}" required>
                             </div>
+                        </div>
 
+                        <div class="form-group">
                             <div class="col-xs-6">
                                 <label for="id_department"><h4>Department</h4></label>
                                 <select name="department" class="select form-control" id="id_department">
-                                    <option value="{{ user.studentprofile.department }}">---------</option>
+                                    <option selected value="{{ user.studentprofile.department }}">Select your department</option>
                                     <option value="EN">ENTC</option>
                                     <option value="CS">CSE</option>
                                     <option value="BM" >BM</option>
@@ -61,20 +59,26 @@
                             </div>
                         </div>
 
-                        <div class="col-xs-6">
-                            <label for="id_indexNo"><h4>Index Number</h4></label>
-                            <input type="text" class="form-control" name="indexNo" maxlength="7" id="id_indexNo" value="{{ user.studentprofile.indexNo }}">
-                        </div>
-
-                        <div class="col-xs-6">
-                            <label for="id_contactNo"><h4>Contact Number</h4></label>
-                            <input type="text" class="form-control" name="contactNo" maxlength="10" id="id_contactNo"  value="{{ user.studentprofile.contactNo }}">
+                        <div class="form-group">
+                            <div class="col-xs-6">
+                                <label for="id_indexNo"><h4>Index Number</h4></label>
+                                <input type="text" class="form-control" name="indexNo" maxlength="7" id="id_indexNo" value="{{ user.studentprofile.indexNo }}" required>
+                            </div>
                         </div>
 
                         <div class="form-group">
-                            <div class="col-xs-12">
-                                <br>
-                                <button class="btn btn-lg btn-success" type="submit">Update</button>
+                            <div class="col-xs-6">
+                                <label for="id_contactNo"><h4>Contact Number</h4></label>
+                                <input type="text" class="form-control" name="contactNo" maxlength="10" id="id_contactNo"  value="{{ user.studentprofile.contactNo }}" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="form-group">
+                                <div class="col-xs-12">
+                                    <br>
+                                    <button class="btn btn-lg btn-success" type="submit">Update</button>
+                                </div>
                             </div>
                         </div>
 
