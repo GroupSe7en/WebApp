@@ -4,10 +4,10 @@
     <!-- <h1>Home page of lecturers</h1> -->
     <div class="container bg-light border rounded m-3 mx-auto">
         <h3 class="lh-1">{{ object.title }}</h3>
-        {% if object.author == user %}
+        {% if object.author == user and object.accept_status == 'PN' %}
           <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'request-update' object.id %}">Update</a>
         {% endif %}
-        <p class="fw-light fst-italic lh-1">from {{ object.reciever }} on {{object.date_posted}}
+        <p class="fw-light fst-italic lh-1">to {{ object.reciever }} on {{object.date_posted}}
           {% if object.accept_status == 'PN' %}
             <span class="badge rounded-pill bg-secondary">Pending</span>
           {% elif object.accept_status == 'AC' %}
@@ -21,5 +21,42 @@
           <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'request-delete' object.id %}">Delete</a>
         {% endif %}
     </div>    
+
+    <div class="container border border-primary rounded m-3 mx-auto">
+      <h2>Comments...</h2>
+      <hr>
+      {% if not object.comments.all %}
+        No Comments Yet.....
+      {% else %}
+        {% for comment in object.comments.all %}
+          <div class=" border border-primary rounded mb-2">
+            <strong>
+              
+              {{ comment.author.profile.firstName }} {{comment.author.lecturerprofile.lastName}} - {{ comment.date_commented }}
+            </strong>
+            </br>
+            {{ comment.body|linebreaksbr }}
+            <div class="container bg-light ">
+              {% if comment.replies.all %}
+                {% for reply in comment.replies.all %}
+                  <div class="mx-3">
+                    <hr> 
+                    <strong>
+                      {{ reply.author.lecturerprofile.firstName }} {{reply.author.lecturerprofile.lastName}} - {{ reply.date_replied }}
+                    </strong>
+                    </br>
+                    {{ reply.body|linebreaksbr }}
+                  </div>
+                {% endfor %}
+              {% endif %}
+            </div>
+            <div class="m-2">
+              <a class="btn btn-primary btn-sm m-1" href="{% url 'request-replycomment' pk=object.id commentpk=comment.id%}">Reply</a>
+            </div>
+          </div>
+        {% endfor %}
+      {% endif %}
+      <p><a class="btn btn-primary btn-sm mt-1 mb-1" href="{% url 'request-addcomment' pk=object.id %}">Add Comment</a></p>
+    </div>
 
 {% endblock content %}
