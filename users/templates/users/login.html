@@ -60,10 +60,10 @@
                             <label for="password" class="text-info">Password:</label><br>
                             <input type="password" name="password" id="password" class="form-control">
                         </div>
-                        <div class="form-group">
+                        <div class="form-group d-flex justify-content-between">
                             <input type="submit" name="Login" class="btn btn-info btn-md" value="Login">
-                            <span style="width:80%; text-align:right;  display: inline-block;"><a class="small-text" href="{% url 'password_reset' %}">Forgot
-                                password?</a></span>
+                            <a class="small-text" href="{% url 'password_reset' %}">Forgot
+                                password?</a>
                             </div>
                         </div>
                     </form>
@@ -74,7 +74,7 @@
 </div>
 
 
-  <footer class="my-5 pt-5 text-muted text-center text-small">
+  <footer class="my-5 pt-5 text-muted text-center text-small fixed-bottom">
     <p class="mb-1">© 2017-2018 Company Name</p>
     <ul class="list-inline">
       <li class="list-inline-item"><a href="#">Contact Us</a></li>
@@ -82,6 +82,7 @@
       <li class="list-inline-item"><a href="#">Help</a></li>
     </ul>
   </footer>
+
 {% endblock content %}
 </html>
 

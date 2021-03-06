@@ -21,6 +21,10 @@ urlpatterns = [
         name='password_reset_confirm'),#password reset confirm view route
     path('password-reset-complete/', auth_views.PasswordResetCompleteView.as_view(template_name='users/password_reset_complete.html'), 
         name='password_reset_complete'),#password reset complete route
+    path('password-change/', auth_views.PasswordChangeView.as_view(template_name='users/password_change_form.html'), 
+        name='password_change'),#password change route
+    path('password-change-done/', auth_views.PasswordChangeDoneView.as_view(template_name='users/password_change_done.html'), 
+        name='password_change_done'),#password change done route
 ]
 
 if settings.DEBUG:

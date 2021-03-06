@@ -36,7 +36,7 @@
           
           <div class="row">
             {% for request in StudentRequests %}
-            <div class="container bg-light border rounded m-3 mx-auto">
+            <div class="container bg-white border border-white shadow p-3 bg-body rounded m-2 mx-auto">
               <h3 class="lh-1">{{ request.title }}</h3>
                   <p class="fw-light fst-italic lh-1">from {{ request.author }} on {{request.date_posted}}
                   {% if request.accept_status == 'PN' %}
@@ -46,11 +46,13 @@
                   {% else %}
                     <span class="badge rounded-pill bg-danger">Rejected</span>
                   {% endif %}
-            <p><a class="btn btn-outline-info" href="{% url 'request-detail' request.id %}" role="button">View details »</a></p>
+                  </p>
+                  <a class="btn btn-outline-info btn-sm" href="{% url 'request-detail' request.id %}" role="button">View details »</a>
             </div>
             {% endfor %}
+            <div class="mb-2"></div>
+            <hr>
           </div>
-          <hr>
         </div> 
   
       </main>
