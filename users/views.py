@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .forms import StudentProfileUpdateForm, LecturerProfileUpdateForm
 
-@login_required(login_url='')
+@login_required(login_url='login/')
 def profile(request):
     if request.user.groups.filter(name='Lecturer').exists():
 

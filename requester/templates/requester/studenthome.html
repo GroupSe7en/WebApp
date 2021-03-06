@@ -1,26 +1,20 @@
 {% extends "requester/base.html" %}
-{% block content %}
 
-    <html lang="en"><head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <meta name="description" content="">
-        <meta name="author" content="">
-        <link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico">
-    
-        <title>Checkout example for Bootstrap</title>
-    
-        <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/checkout/">
-    
-        <!-- Bootstrap core CSS -->
-        <link href="../../dist/css/bootstrap.min.css" rel="stylesheet">
-    
-        <!-- Custom styles for this template -->
-        <link href="form-validation.css" rel="stylesheet">
-      </head>
-    
-      <body class="bg-light" data-new-gr-c-s-check-loaded="14.996.0" data-gr-ext-installed="">
-    
+    {% block head %}
+      <link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico">
+      
+      <title>Checkout example for Bootstrap</title>
+
+      <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/checkout/">
+
+      <!-- Bootstrap core CSS -->
+      <link href="../../dist/css/bootstrap.min.css" rel="stylesheet">
+
+      <!-- Custom styles for this template -->
+      <link href="form-validation.css" rel="stylesheet">
+    {% endblock %}
+
+      {% block content %}
         <div class="container">
           <div class="py-5 text-center">
             <h1>Welcome Back!</h1>
@@ -34,7 +28,7 @@
                 {% for request in StudentRequests %}
                 <div class="container bg-light border rounded m-3 mx-auto">
                     <h5 class="lh-1">{{ request.title }}</h5>
-                    <p class="fw-light fst-italic lh-1">from {{ request.author }} on {{request.date_posted}}
+                    <p class="fw-light fst-italic lh-1">to {{ request.reciever }} on {{request.date_posted}}
                         {% if request.accept_status == 'PN' %}
                             <span class="badge rounded-pill bg-secondary">Pending</span>
                         {% elif request.accept_status == 'AC' %}
@@ -43,61 +37,13 @@
                             <span class="badge rounded-pill bg-danger">Rejected</span>
                         {% endif %}
                     </p>
+                    <p><a class="btn btn-outline-info" href="{% url 'request-detail' request.id %}" role="button">View details »</a></p>
               </div>
             {% endfor %}
             </div>
         </div>
 
-            <div class="row">
-                <h3 class="d-flex justify-content-center">
-                  <span>New Request</span>
-                </h3>
-
-              <form class="needs-validation" novalidate="">
-    
-    
-                <div class="mb-3">
-                  <label for="email">Who do you want to send the request? <span class="text-muted">Please select a lecturer</span></label>
-                  <select class="custom-select d-block w-100" id="country" required="">
-                    <option value="">Choose...</option>
-                    <option>Lecturer1</option>
-                  </select>
-                  <div class="invalid-feedback">
-                    Please enter a valid lecturer username
-                  </div>
-                </div>
-    
-                <div class="mb-3">
-                  <label for="address">Add Request here</label>
-                  <input type="text" class="form-control"  placeholder="type here..." required="">
-                  <div class="invalid-feedback">
-                    Please enter a request.
-                  </div>
-                </div>
-    
-                <hr class="mb-4">
-                <div class="custom-control custom-checkbox">
-                  <input type="checkbox">
-                  <label>I confirm this is me whose giving this request</label>
-                </div>
-
-                <hr class="mb-4">
-                <button class="btn btn-primary btn-lg btn-block" type="submit">Request</button>
-              </form>
-            </div>
-          </div>
-    
-          <footer class="my-5 pt-5 text-muted text-center text-small">
-            <p class="mb-1">© 2017-2018 Company Name</p>
-            <ul class="list-inline">
-              <li class="list-inline-item"><a href="#">Help</a></li>
-              <li class="list-inline-item"><a href="#">Logout</a></li>
-              <li class="list-inline-item"><a href="#">Go Up</a></li>
-            </ul>
-          </footer>
-        </div>
-    
-
-    </body></html>
+    </body>
+    </html>
 
 {% endblock content %}

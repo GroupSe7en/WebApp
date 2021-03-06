@@ -3,17 +3,58 @@
 
     <!-- <h1>Home page of lecturers</h1> -->
     <div class="container bg-light border rounded m-3 mx-auto">
-        <h3 class="lh-1">{{ request.title }}</h3>
-        <p class="fw-light fst-italic lh-1">from {{ request.author }} on {{request.date_posted}}
-          {% if request.accept_status == 'PN' %}
+        <h3 class="lh-1">{{ object.title }}</h3>
+        <p class="fw-light fst-italic lh-1">from {{ object.author }} on {{object.date_posted}}
+          {% if object.accept_status == 'PN' %}
             <span class="badge rounded-pill bg-secondary">Pending</span>
-          {% elif request.accept_status == 'AC' %}
+          {% elif object.accept_status == 'AC' %}
             <span class="badge rounded-pill bg-success">Accepted</span>
           {% else %}
             <span class="badge rounded-pill bg-danger">Rejected</span>
           {% endif %}
         </p>
-        <p>{{ request.content }}</p>
-    </div>    
+        <p>{{ object.content|linebreaksbr }}</p>
+        <a class="btn btn-success btn-sm mt-1 mb-1" href="{% url 'request-review' pk=object.id review='accept' %}">Accept</a>
+        <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'request-review' pk=object.id review='reject' %}">Reject</a>
+    </div>
 
+    <div class="container border border-primary rounded m-3 mx-auto">
+      <h2>Comments...</h2>
+      <hr>
+      {% if not object.comments.all %}
+        No Comments Yet.....
+      {% else %}
+        {% for comment in object.comments.all %}
+          <div class=" border border-primary rounded mb-2">
+            <strong>
+              {% if comment.author.groups.all.0.name == "Lecturer" %}
+                {{ comment.author.lecturerprofile.firstName }} {{comment.author.lecturerprofile.lastName}} - {{ comment.date_commented }}
+              {% elif comment.author.groups.all.0.name == "Student"%}
+                {{ comment.author.studentprofile.firstName }} {{comment.author.studentprofile.lastName}} - {{ comment.date_commented }}
+              {% endif %}
+            </strong>
+            </br>
+            {{ comment.body|linebreaksbr }}
+            <div class="container bg-light ">
+              {% if comment.replies.all %}
+                {% for reply in comment.replies.all %}
+                  <div class="mx-3">
+                    <hr> 
+                    <strong>
+                      {{ reply.author.lecturerprofile.firstName }} {{reply.author.lecturerprofile.lastName}} - {{ reply.date_replied }}
+                    </strong>
+                    </br>
+                    {{ reply.body|linebreaksbr }}
+                  </div>
+                {% endfor %}
+              {% endif %}
+            </div>
+            <div class="m-2">
+              <a class="btn btn-primary btn-sm m-1" href="{% url 'request-replycomment' pk=object.id commentpk=comment.id%}">Reply</a>
+            </div>
+          </div>
+        {% endfor %}
+      {% endif %}
+      <p><a class="btn btn-primary btn-sm mt-1 mb-1" href="{% url 'request-addcomment' pk=object.id %}">Add Comment</a></p>
+    </div>
 {% endblock content %}

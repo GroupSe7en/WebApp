@@ -1,28 +1,23 @@
 {% extends "requester/base.html" %}
-{% block content %}
-
     <!-- <h1>Home page of lecturers</h1> -->
 
 
-    <html lang="en"><head>
-      <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-      <meta name="description" content="">
-      <meta name="author" content="">
+    {% block head %}
       <link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico">
-  
+    
       <title>Jumbotron Template for Bootstrap</title>
-  
+
       <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/jumbotron/">
-  
+
       <!-- Bootstrap core CSS -->
       <link href="../../dist/css/bootstrap.min.css" rel="stylesheet">
-  
+
       <!-- Custom styles for this template -->
       <link href="jumbotron.css" rel="stylesheet">
-    </head>
-  
-    <body data-new-gr-c-s-check-loaded="14.996.0" data-gr-ext-installed="">
+    {% endblock %}
+    
+    {% block content %}
+
       <main role="main">
   
         <!-- Main jumbotron for a primary marketing message or call to action -->
@@ -51,8 +46,7 @@
                   {% else %}
                     <span class="badge rounded-pill bg-danger">Rejected</span>
                   {% endif %}
-            </div--> 
-            <p><a class="btn btn-secondary" href="#" role="button">View details »</a></p>
+            <p><a class="btn btn-outline-info" href="{% url 'request-detail' request.id %}" role="button">View details »</a></p>
             </div>
             {% endfor %}
           </div>
@@ -62,10 +56,7 @@
       </main>
   
       <br>
-      <br>
-      <footer class="container">
-        <p>© Company 2017-2018</p>
-      </footer>
+  
 
       
       <!--div class="container bg-light border rounded m-3 mx-auto">

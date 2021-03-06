@@ -59,8 +59,8 @@ class Profile(models.Model):
     def __str__(self):
         return f'{self.user.email} Profile'
 
-    def save(self):
-        super().save()
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
         img = Image.open(self.image.path)
         if img.height > 300 or img.width > 300:
             output_size = (300, 300)
@@ -82,7 +82,7 @@ class StudentProfile(Profile):
     ('CE', 'CE')
     ]
 
-    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, related_name="studentprofile")
     indexNo = models.CharField(max_length=7)
     department = models.CharField(max_length=2, choices=DEPARTMENT_CHOICES)
     contactNo = models.CharField(max_length=10)
@@ -100,5 +100,5 @@ class LecturerProfile(Profile):
     ('MA', 'MA')
     ]
 
-    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, related_name="lecturerprofile")
     department = models.CharField(max_length=2, choices=DEPARTMENT_CHOICES)

@@ -1,8 +1,8 @@
-from django.shortcuts import render
-from django.views.generic import ListView, DetailView
-from django.contrib.auth.decorators import login_required
-from .models import StudentRequest
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.shortcuts import render, redirect
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, View
+from django.contrib.auth.decorators import login_required, user_passes_test
+from .models import StudentRequest, Comment, CommentReply
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
 # #home page of requester app
 # @login_required(login_url='')
@@ -24,8 +24,6 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 class RequestListView(LoginRequiredMixin, ListView):
 
   context_object_name = 'StudentRequests'
-  login_url = ''
-  redirect_field_name = 'redirect_to'
 
   def get_queryset(self):
     if self.request.user.groups.filter(name='Lecturer').exists():
@@ -45,11 +43,104 @@ class RequestDetailView(LoginRequiredMixin, DetailView):
 
   model = StudentRequest
   context_object_name = 'StudentRequests'
-  login_url = ''
-  redirect_field_name = 'redirect_to'
 
   def get_template_names(self):
     if self.request.user.groups.filter(name='Lecturer').exists():
-      return ['requester/lecturerhome.html']
+      return ['requester/lecturer_requestdetail.html']
     elif self.request.user.groups.filter(name='Student').exists():
-      return ['requester/studenthome.html']
+      return ['requester/student_requestdetail.html']
+
+
+class RequestCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
+
+  model = StudentRequest
+  fields = ['requestType', 'title', 'content', 'reciever']
+
+  def form_valid(self, form):
+    form.instance.author = self.request.user
+    return super().form_valid(form)
+  
+  def test_func(self):
+    if (self.request.user.groups.filter(name='Student').exists()):
+      return True
+    return False
+
+
+class RequestUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+
+  model = StudentRequest
+  fields = ['requestType', 'title', 'content', 'reciever']
+
+  def form_valid(self, form):
+    form.instance.author = self.request.user
+    return super().form_valid(form)
+
+  def test_func(self):
+    request = self.get_object()
+    if ((self.request.user == request.author) and (StudentRequest.objects.filter(id = self.kwargs['pk']).first().accept_status == 'PN')):
+      return True
+    return False
+
+
+class RequestDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+
+  model = StudentRequest
+  success_url = ""
+
+  def test_func(self):
+    request = self.get_object()
+    if (self.request.user == request.author):
+      return True
+    return False
+
+
+class RequestReviewView(LoginRequiredMixin, UserPassesTestMixin, View):
+
+  def test_func(self):
+    studentrequest = StudentRequest.objects.filter(id = self.kwargs['pk']).first()
+    if (self.request.user == studentrequest.reciever):
+      if (self.kwargs['review'] == 'accept'):
+        studentrequest.accept_status = 'AC'
+        studentrequest.save()
+      elif (self.kwargs['review'] == 'reject'):
+        studentrequest.accept_status = 'RJ'
+        studentrequest.save()
+      return True
+    return False
+
+  def get(self, request, *args, **kwargs):
+        return redirect('request-detail', pk = kwargs['pk'])
+
+
+class AddCommentView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
+
+  model = Comment
+  fields = ['body']
+
+  def form_valid(self, form):
+    form.instance.author = self.request.user
+    form.instance.studentrequest = StudentRequest.objects.filter(id = self.kwargs['pk']).first()
+    return super().form_valid(form)
+  
+  def test_func(self):
+    studentrequest = StudentRequest.objects.filter(id = self.kwargs['pk']).first()
+    if (self.request.user == studentrequest.author) or (self.request.user == studentrequest.reciever):
+      return True
+    return False
+
+
+class AddReplyView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
+
+  model = CommentReply
+  fields = ['body']
+
+  def form_valid(self, form):
+    form.instance.author = self.request.user
+    form.instance.comment = Comment.objects.filter(id = self.kwargs['commentpk']).first()
+    return super().form_valid(form)
+  
+  def test_func(self):
+    comment = Comment.objects.filter(id = self.kwargs['commentpk']).first()
+    if (self.request.user == comment.studentrequest.author) or (self.request.user == comment.studentrequest.reciever):
+      return True
+    return False
