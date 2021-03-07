@@ -29,13 +29,16 @@
           </div>
         </div>
   
-        <br>
-        <br>
+        <div>
+          <form action="" method="get">
+            {{ filterset.form.as_p }}
+            <input type="submit" />
+          </form>
+        </div>
+
         <div class="container">
-          <!-- Example row of columns -->
-          
           <div class="row">
-            {% for request in StudentRequests %}
+            {% for request in object_list %}
             <div class="container bg-white border border-white shadow p-3 bg-body rounded m-2 mx-auto">
               <h3 class="lh-1">{{ request.title }}</h3>
                   <p class="fw-light fst-italic lh-1">from {{ request.author }} on {{request.date_posted}}
