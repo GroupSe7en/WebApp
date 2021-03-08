@@ -10,3 +10,4 @@ lecturer2@uom.lk    admin321
 pip install django-crispy-forms
 pip install pillow
 pip install django-filter
+pip install django-notifications-hq
