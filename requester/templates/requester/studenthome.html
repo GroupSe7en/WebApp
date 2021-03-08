@@ -20,12 +20,19 @@
             <h1>Welcome Back!</h1>
             <p class="lead">Below is an example form built entirely with Bootstrap's form controls. Each required form group has a validation state that can be triggered by attempting to submit the form without completing it.</p>
           </div>
-    
+          
+          <div class="">
+            <form action="" method="get">
+              {{ filterset.form.as_p }}
+              <input type="submit" />
+            </form>
+          </div>
+
           <div class="row">
               <h3 class="d-flex justify-content-center">
                 <span>Responses</span>
               </h3>
-                {% for request in StudentRequests %}
+                {% for request in object_list %}
                 <div class="container bg-white border border-white shadow p-3 bg-body rounded m-2 mx-auto">
                     <h5 class="lh-1">{{ request.title }}</h5>
                     <p class="fw-light fst-italic lh-1">to {{ request.reciever }} on {{request.date_posted}}
