@@ -1,4 +1,4 @@
-envfrom django.contrib import admin
+from django.contrib import admin
 from .models import StudentRequest, Comment, CommentReply
 
 admin.site.register(StudentRequest)
