@@ -1,0 +1,19 @@
+{% extends "requester/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class='container'>
+    <div>
+        <form class="container bg-white border border-white shadow p-3 bg-body rounded m-4 mx-auto" method="POST">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Reply Comment</legend>
+                {{ form|crispy }}
+            </fieldset>
+            <div>
+                <button class="btn btn-outline-info m-3" type="submit">Submit</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock content %}

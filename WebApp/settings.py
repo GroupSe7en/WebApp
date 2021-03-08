@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_filters',
 ]
 
 MIDDLEWARE = [
@@ -133,3 +134,10 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'#crispy forms bootstrap version
 LOGIN_REDIRECT_URL = 'requester-home'#login redirect url
 
 LOGIN_URL = 'login'#login url
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'cse1962webapp@gmail.com'
+EMAIL_HOST_PASSWORD = 'webApp@se7en'
