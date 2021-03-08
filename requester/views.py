@@ -46,8 +46,7 @@ class StudentRequestFilterset(django_filters.FilterSet):
         model = StudentRequest
         fields = {
             'requestType': ['exact'],
-            'reciever__email': ['exact', 'contains'],
-            'requestType': ['exact'],
+            'reciever__email': ['contains'],
             'title' : ['contains'],
             'date_posted' : ['exact'],
             'accept_status' : ['exact'],
@@ -58,14 +57,14 @@ class LecturerRequestFilterset(django_filters.FilterSet):
       model = StudentRequest
       fields = {
           'requestType': ['exact'],
-          'author__email': ['exact', 'contains'],
+          'author__email': ['contains'],
           'requestType': ['exact'],
           'title' : ['contains'],
           'date_posted' : ['exact'],
           'accept_status' : ['exact'],
       }
 
-class RequestListView(ListView):
+class RequestListView(LoginRequiredMixin, ListView):
     filterset_class = None
 
     def get_queryset(self):

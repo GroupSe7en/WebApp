@@ -1,55 +1,56 @@
 {% extends "requester/base.html" %}
-
-    {% block head %}
+  
+  {% block head %}
       <link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico">
-      
-      <title>Checkout example for Bootstrap</title>
+      <title>Se7en</title>
+  {% endblock %}
 
-      <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/checkout/">
+  {% block content %}
+  <div class="container-fluid">
+    <div class="row">
 
-      <!-- Bootstrap core CSS -->
-      <link href="../../dist/css/bootstrap.min.css" rel="stylesheet">
-
-      <!-- Custom styles for this template -->
-      <link href="form-validation.css" rel="stylesheet">
-    {% endblock %}
-
-      {% block content %}
-        <div class="container">
-          <div class="py-5 text-center">
-            <h1>Welcome Back!</h1>
-            <p class="lead">Below is an example form built entirely with Bootstrap's form controls. Each required form group has a validation state that can be triggered by attempting to submit the form without completing it.</p>
-          </div>
-          
-          <div class="">
-            <form action="" method="get">
-              {{ filterset.form.as_p }}
-              <input type="submit" />
-            </form>
-          </div>
-
-          <div class="row">
-              <h3 class="d-flex justify-content-center">
-                <span>Responses</span>
-              </h3>
-                {% for request in object_list %}
-                <div class="container bg-white border border-white shadow p-3 bg-body rounded m-2 mx-auto">
-                    <h5 class="lh-1">{{ request.title }}</h5>
-                    <p class="fw-light fst-italic lh-1">to {{ request.reciever }} on {{request.date_posted}}
-                        {% if request.accept_status == 'PN' %}
-                            <span class="badge rounded-pill bg-secondary">Pending</span>
-                        {% elif request.accept_status == 'AC' %}
-                            <span class="badge rounded-pill bg-success">Accepted</span>
-                        {% else %}
-                            <span class="badge rounded-pill bg-danger">Rejected</span>
-                        {% endif %}
-                    </p>
-                    <a class="btn btn-outline-info btn-sm" href="{% url 'request-detail' request.id %}" role="button">View details »</a>
-              </div>
-            {% endfor %}
-            <div class="mb-2"></div>
-            </div>
-            <hr>
+      <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+        <div class="position-sticky pt-3">
+          <form class="mx-auto" action="" method="get">
+            {{ filterset.form.as_p }}
+            <input class="btn btn-secondary" type="submit" value="Filter">
+          </form>
         </div>
+      </nav>
 
+      <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
+        <div class="container">
+            <div class="py-5 text-center">
+              <h1>Welcome Back!</h1>
+              <p class="lead">Below is an example form built entirely with Bootstrap's form controls. Each required form group has a validation state that can be triggered by attempting to submit the form without completing it.</p>
+            </div>
+            
+            <div class="row">
+                <h3 class="d-flex justify-content-center">
+                  <span>Requests</span>
+                </h3>
+                  {% for request in object_list %}
+                  <div class="container bg-white border border-white shadow p-3 bg-body rounded m-2 mx-auto">
+                      <h5 class="lh-1">{{ request.title }}</h5>
+                      <p class="fw-light fst-italic lh-1">to {{ request.reciever }} on {{request.date_posted}}
+                          {% if request.accept_status == 'PN' %}
+                              <span class="badge rounded-pill bg-secondary">Pending</span>
+                          {% elif request.accept_status == 'AC' %}
+                              <span class="badge rounded-pill bg-success">Accepted</span>
+                          {% else %}
+                              <span class="badge rounded-pill bg-danger">Rejected</span>
+                          {% endif %}
+                      </p>
+                      <a class="btn btn-outline-info btn-sm" href="{% url 'request-detail' request.id %}" role="button">View details »</a>
+                </div>
+              {% endfor %}
+              <div class="mb-2"></div>
+              </div>
+              <hr>
+          </div>
+
+      </main>
+
+    </div>
+  </div>
 {% endblock content %}
