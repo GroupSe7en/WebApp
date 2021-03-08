@@ -3,6 +3,7 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from django.contrib.auth.decorators import login_required, user_passes_test
 from .models import StudentRequest, Comment, CommentReply
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+import django_filters 
 
 # #home page of requester app
 # @login_required(login_url='')
@@ -21,23 +22,80 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 #         return render(request, 'requester/studenthome.html', context)#if user is a lecturer render lecturer home page
 
 #home page of requester app
-class RequestListView(LoginRequiredMixin, ListView):
+# class RequestListView(LoginRequiredMixin, ListView):
 
-  context_object_name = 'StudentRequests'
+#   context_object_name = 'StudentRequests'
 
-  def get_queryset(self):
-    if self.request.user.groups.filter(name='Lecturer').exists():
-      queryset = StudentRequest.objects.filter(reciever=self.request.user).all().order_by('-date_posted')
-    elif self.request.user.groups.filter(name='Student').exists():
+#   def get_queryset(self):
+#     if self.request.user.groups.filter(name='Lecturer').exists():
+#       queryset = StudentRequest.objects.filter(reciever=self.request.user).all().order_by('-date_posted')
+#     elif self.request.user.groups.filter(name='Student').exists():
+#         queryset = StudentRequest.objects.filter(author=self.request.user).all().order_by('-date_posted')
+#     return queryset
+
+#   def get_template_names(self):
+#     if self.request.user.groups.filter(name='Lecturer').exists():
+#       return ['requester/lecturerhome.html']
+#     elif self.request.user.groups.filter(name='Student').exists():
+#       return ['requester/studenthome.html']
+
+#######################################################################################################################################
+
+class StudentRequestFilterset(django_filters.FilterSet):
+    class Meta:
+        model = StudentRequest
+        fields = {
+            'requestType': ['exact'],
+            'reciever__email': ['exact', 'contains'],
+            'requestType': ['exact'],
+            'title' : ['contains'],
+            'date_posted' : ['exact'],
+            'accept_status' : ['exact'],
+        }
+  
+class LecturerRequestFilterset(django_filters.FilterSet):
+  class Meta:
+      model = StudentRequest
+      fields = {
+          'requestType': ['exact'],
+          'author__email': ['exact', 'contains'],
+          'requestType': ['exact'],
+          'title' : ['contains'],
+          'date_posted' : ['exact'],
+          'accept_status' : ['exact'],
+      }
+
+class RequestListView(ListView):
+    filterset_class = None
+
+    def get_queryset(self):
+      if self.request.user.groups.filter(name='Lecturer').exists():
+        queryset = StudentRequest.objects.filter(reciever=self.request.user).all().order_by('-date_posted')
+        self.filterset_class = LecturerRequestFilterset
+      elif self.request.user.groups.filter(name='Student').exists():
         queryset = StudentRequest.objects.filter(author=self.request.user).all().order_by('-date_posted')
-    return queryset
+        self.filterset_class = StudentRequestFilterset
+      # Then use the query parameters and the queryset to
+      # instantiate a filterset and save it as an attribute
+      # on the view instance for later.
+      self.filterset = self.filterset_class(self.request.GET, queryset=queryset)
+      # Return the filtered queryset
+      return self.filterset.qs.distinct()
 
-  def get_template_names(self):
-    if self.request.user.groups.filter(name='Lecturer').exists():
-      return ['requester/lecturerhome.html']
-    elif self.request.user.groups.filter(name='Student').exists():
-      return ['requester/studenthome.html']
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # Pass the filterset to the template - it provides the form.
+        context['filterset'] = self.filterset
+        return context
+    
 
+    def get_template_names(self):
+      if self.request.user.groups.filter(name='Lecturer').exists():
+        return ['requester/lecturerhome.html']
+      elif self.request.user.groups.filter(name='Student').exists():
+        return ['requester/studenthome.html']
+
+#################################################################################################################
 
 class RequestDetailView(LoginRequiredMixin, DetailView):
 
