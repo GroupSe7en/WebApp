@@ -9,45 +9,63 @@
   <div class="container-fluid">
     <div class="row">
 
-      <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
-        <div class="position-sticky pt-3">
-          <form class="mx-auto" action="" method="get">
+      <main role="main">
+  
+        <div class="container">
+          <div class="py-5 text-center">
+            <h1>Welcome Back {% ifequal user.groups.all.0|stringformat:"s" 'Student' %}
+              {{ user.studentprofile.firstName}} {{ user.studentprofile.lastName}}
+            {% endifequal %}
+            {% ifequal user.groups.all.0|stringformat:"s" 'Lecturer' %}
+              {{ user.lecturerprofile.firstName}} {{ user.lecturerprofile.lastName}}
+            {% endifequal %}!</h1>
+            <p>The request from other webapp members are shown below. You can read full details by clicking View details. If you want to sort requests, please use below _______ . You can respond and comment to the requests. To go to your profile, select "Profile" from above navigation bar.To logout, select "Log Out". <br>Have a nice experience!</p>
+          </div>
+  
+        <div>
+          <form action="" method="get">
             {{ filterset.form.as_p }}
             <input class="btn btn-secondary" type="submit" value="Filter">
           </form>
         </div>
-      </nav>
-
-      <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
-        <div class="jumbotron">
-            <div class="container">
-              <h1 class="display-3">Welcome Back!</h1>
-              <p>These are the request that has sent by the students for you. Please check them and respond. anything else bla bla blaa</p>
-              <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more »</a></p>
+        <br>
+        <br>
+        <div class="container">
+          <div class="row">
+            {% for request in object_list %}
+            <div class="container bg-white border border-white shadow p-3 bg-body rounded m-2 mx-auto">
+              <h3 class="lh-1">{{ request.title }}</h3>
+                  <p class="fw-light fst-italic lh-1">from {{ request.author }} on {{request.date_posted}}
+                  {% if request.accept_status == 'PN' %}
+                    <span class="badge rounded-pill bg-secondary">Pending</span>
+                  {% elif request.accept_status == 'AC' %}
+                    <span class="badge rounded-pill bg-success">Accepted</span>
+                  {% else %}
+                    <span class="badge rounded-pill bg-danger">Rejected</span>
+                  {% endif %}
+                  </p>
+                  <a class="btn btn-outline-info btn-sm" href="{% url 'request-detail' request.id %}" role="button">View details »</a>
             </div>
           </div>
-    
-          <div class="container">
-            <div class="row">
-              {% for request in object_list %}
-              <div class="container bg-white border border-white shadow p-3 bg-body rounded m-2 mx-auto">
-                <h3 class="lh-1">{{ request.title }}</h3>
-                    <p class="fw-light fst-italic lh-1">from {{ request.author }} on {{request.date_posted}}
-                    {% if request.accept_status == 'PN' %}
-                      <span class="badge rounded-pill bg-secondary">Pending</span>
-                    {% elif request.accept_status == 'AC' %}
-                      <span class="badge rounded-pill bg-success">Accepted</span>
-                    {% else %}
-                      <span class="badge rounded-pill bg-danger">Rejected</span>
-                    {% endif %}
-                    </p>
-                    <a class="btn btn-outline-info btn-sm" href="{% url 'request-detail' request.id %}" role="button">View details »</a>
-              </div>
-              {% endfor %}
-              <div class="mb-2"></div>
-              <hr>
-            </div>
-          </div> 
+        </div> 
+  
+      </main>
+  
+      <br>
+      <!--div class="container bg-light border rounded m-3 mx-auto">
+        <h3 class="lh-1">{{ request.title }}</h3>
+        <p class="fw-light fst-italic lh-1">from {{ request.author }} on {{request.date_posted}}
+          {% if request.accept_status == 'PN' %}
+            <span class="badge rounded-pill bg-secondary">Pending</span>
+          {% elif request.accept_status == 'AC' %}
+            <span class="badge rounded-pill bg-success">Accepted</span>
+          {% else %}
+            <span class="badge rounded-pill bg-danger">Rejected</span>
+          {% endif %}
+        </p>
+      </div-->    
+   
+
 
       </main>
 
