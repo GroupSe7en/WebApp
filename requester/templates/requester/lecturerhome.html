@@ -1,26 +1,22 @@
 {% extends "requester/base.html" %}
-  
-  {% block head %}
-      <link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico">
-      <title>Se7en</title>
-  {% endblock %}
 
   {% block content %}
     <div class="container-fluid">
       <div class="row">
 
-        <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+        <nav id="sidebarMenu" class="col-md-4 col-lg-2 d-md-block bg-light sidebar collapse">
           <div class="position-sticky pt-3">
-            <h5>Filter Requests</h5>
-            <hr class="my-2">
             <form class="mx-auto" action="" method="get">
-              {{ filterset.form.as_p }}
-              <input class="btn btn-secondary my-3" type="submit" value="Filter">
+              <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Filter Requests</legend>
+                {{ filterset.form.as_p }}
+              </fieldset>
+              <input class="btn btn-info my-3" type="submit" value="Filter">
             </form>
           </div>
         </nav>
 
-        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
+        <main class="col-md-8 ms-sm-auto col-lg-10 px-md-4"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
           <div class="container">
             <div class="py-5 text-center">
               <h1>Welcome Back {% ifequal user.groups.all.0|stringformat:"s" 'Student' %}

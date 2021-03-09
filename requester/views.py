@@ -48,7 +48,7 @@ class StudentRequestFilterset(django_filters.FilterSet):
             'requestType': ['exact'],
             'reciever__email': ['contains'],
             'title' : ['contains'],
-            'date_posted' : ['exact'],
+            'date_posted' : ['date__range'],
             'accept_status' : ['exact'],
         }
   
@@ -60,7 +60,7 @@ class LecturerRequestFilterset(django_filters.FilterSet):
           'author__email': ['contains'],
           'requestType': ['exact'],
           'title' : ['contains'],
-          'date_posted' : ['exact'],
+          'date_posted' : ['date__range'],
           'accept_status' : ['exact'],
       }
 
