@@ -27,8 +27,41 @@
       body {
         background-color: #ffffff;
       }
-    </style>
 
+.btn-circle,
+#to-top {
+  border-radius: 50%;
+  background: #111e6c;
+  padding: 6px;
+  font-size: 14px;
+  /* border-radius: 50%; */
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+  color: #fff;
+  text-align: center;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.c2a-btn {
+  margin: 48px auto 0;
+  margin: 4.8rem auto 0;
+}
+
+.btn-default {
+  color: #fff;
+  background-color: #111e6c;
+  border-color: #111e6c;
+  transition: all 1s ease;
+}
+
+.btn-group-lg > .btn,
+.btn-lg {
+  padding: 18px 28px;
+  font-size: 18px;
+  line-height: 1.3333333;
+  border-radius: 50px;
+}
+    </style>
 
   </head>
 
@@ -47,7 +80,7 @@
         <img src="https://utilitypeopleuk.com/wp-content/uploads/2017/06/twitter-icon-circle-blue-logo-preview.png" width="30" height="30" alt="">
       </a> -->
       <div class="container-fluid">
-        <a class="navbar-brand text-white" href="#">Requester</a>
+        <a class="navbar-brand text-white" href="#">Thank You For Using My Requester!</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -77,7 +110,12 @@
         <h2 class="text-center">You have been logged out</h2>
       </div>
       <div class="d-flex justify-content-center p-3 mx-auto">
-        <a class="btn btn-info btn-md " href="{%url 'login' %}"> Log In Again </a>
+          <div class="btn-group btn-group-lg" role="group" aria-label="Call to action">
+            <a class="btn btn-primary" " href="{%url 'login' %}"> Log In Again </a>
+            <!-- <span class="btn-circle btn-or">or</span> -->
+            <a class="btn btn-dark" href="https://www.google.com/"> Back to Home </a>
+        </div>
+        
       </div>
     </div>
 
@@ -90,8 +128,10 @@
                       <div class="icon">
                           <i class="pe-7s-keypad text-danger"></i>
                       </div>
-                      <h3>Follow Us On</h3>
-                      <p class="description">Cards, Blogs, Info Areas, Sections etc. The templates comes with a large number of components.</p>
+                      <h3>See Our Work</h3>
+                      <a type="button" class="btn btn-default btn-lg" href="https://github.com/GroupSe7en/WebApp.git">GitHub</a>
+                      
+                    
                   </div>
               </div>
               <div class="col-md-4 col-sm-4">
@@ -100,7 +140,13 @@
                           <i class="pe-7s-albums text-danger"></i>
                       </div>
                       <h3>Members</h3>
-                      <p class="description">Speed up your development time or get inspired with the large number of example pages.</p>
+                      <p class="description">
+                        <li>Danusha Hewagama</li>
+                        <li>Kavishka Gunathilaka</li>
+                        <li>Chathuranga Jayanath</li>
+                        <li>Supul Kalhara</li>
+                        <li>Shilpa Perera</li>
+                      </p>
                   </div>
               </div>
               <div class="col-md-4 col-sm-4">
@@ -109,7 +155,15 @@
                           <i class="pe-7s-vector text-danger"></i>
                       </div>
                       <h3>Contact Details</h3>
-                      <p class="description">The templates comes packed with vector font icons to help you stand out from the crowd.</p>
+                      <p class="description">
+                        LinkedIn
+                        <li><a href=# </li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                      </p>
+                  </div>
                   </div>
               </div>
           </div>
@@ -122,7 +176,7 @@
     <div class="container-fluid fixed-bottom footer">
       <div class="row">
       <p class="mb-1 text-center text-white">Group Se7en</p>
-      <a href="#"><p class="text-center text-reset text-white">About</p></a>
+      <p class="mb-1 text-center text-white">CopyWrite issues will be fucked in Your ass!!!</p>
     </div>
 
   </body>
