@@ -25,15 +25,6 @@
       .background { 
         background-color: #ffffff; 
       }
-
-
-      .icon-bar navbar fixed-top navbar-expand-sm navbar-dark {
-
-}
-
-.icon-bar a:hover {
-  background-color: #000; /* Add a hover color */
-}
     </style>
   </head>
 
@@ -72,8 +63,6 @@
             {% endifequal %}
             <li class="nav-item">
               <a class="nav-link text-reset" href="{% url 'requester-home' %}">Home</a>
-              <li class="nav-item">
-                <a style = "color: white;" href="#"><i class="fa fa-globe"></i></a>
             </li>
             <li class="nav-item">
               <a class="nav-link text-reset" href="{% url 'profile' %}" tabindex="-1" aria-disabled="true">Profile</a>
