@@ -38,4 +38,3 @@ def profile(request):
         }
 
         return render(request, 'users/studentprofile.html', context)
-    
