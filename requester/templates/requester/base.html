@@ -45,23 +45,13 @@
     <nav class="navbar fixed-top navbar-expand-sm navbar-dark">
       <div class="container-fluid">
         <a class="navbar-brand fw-bold text-white" href="{% url 'requester-home' %}">
-          {% ifequal user.groups.all.0|stringformat:"s" 'Student' %}
-            {{ user.studentprofile.firstName}} {{ user.studentprofile.lastName}}
-          {% endifequal %}
-          {% ifequal user.groups.all.0|stringformat:"s" 'Lecturer' %}
-            {{ user.lecturerprofile.firstName}} {{ user.lecturerprofile.lastName}}
-          {% endifequal %}
+            {{ user }}
         </a>
         <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
           <ul class="nav fw-bold text-white">
-            {% ifequal user.groups.all.0|stringformat:"s" 'Student' %}
-            <li class="nav-item">
-              <a class="nav-link text-reset" href="{% url 'request-create' %}">New Request</a>
-            </li>
-            {% endifequal %}
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle text-reset text-white" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Notifications
@@ -81,6 +71,11 @@
                 {% endif %}
               </ul>
             </li>
+            {% ifequal user.groups.all.0|stringformat:"s" 'Student' %}
+            <li class="nav-item">
+              <a class="nav-link text-reset" href="{% url 'request-create' %}">New Request</a>
+            </li>
+            {% endifequal %}
             <li class="nav-item">
               <a class="nav-link text-reset" href="{% url 'requester-home' %}">Home</a>
             </li>

@@ -77,7 +77,7 @@ class RequestDetailView(LoginRequiredMixin, DetailView):
 class RequestCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
 
   model = StudentRequest
-  fields = ['requestType', 'title', 'content', 'reciever']
+  fields = ['requestType', 'title', 'content', 'reciever', 'attachments']
 
   def form_valid(self, form):
     form.instance.author = self.request.user
