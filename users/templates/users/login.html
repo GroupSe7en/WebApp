@@ -1,10 +1,8 @@
 {% load crispy_forms_tags %}
 {% block head %}
-    <link rel="shortcut icon" href="https://freepngimg.com/thumb/logo/62837-instagram-icons-photography-computer-logo-icon.png" />
+
+    <link rel="shortcut icon" href="https://www.flaticon.com/svg/vstatic/svg/942/942744.svg?token=exp=1615479807~hmac=dc1c6f50455e0dee43fecd31a9cfd986" />
     <title> My Requester </title>
-
-
-   
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -62,8 +60,7 @@
                         </div>
                         <div class="form-group d-flex justify-content-between">
                             <input type="submit" name="Login" class="btn btn-info btn-md" value="Login">
-                            <a class="small-text" href="{% url 'password_reset' %}">Forgot
-                                password?</a>
+                            <a class="small-text" href="{% url 'password_reset' %}">Forgot password?</a>
                             </div>
                         </div>
                     </form>
@@ -76,8 +73,8 @@
   <footer class="my-5 pt-5 text-muted text-center text-small fixed-bottom">
     <p class="mb-1 text-white">Group Se7en</p>
     <ul class="list-inline">
-      <li class="list-inline-item"><a class="text-white" href="#">Contact Us</a></li>
-      <li class="list-inline-item"><a class="text-white" href="#">Help</a></li>
+      <li class="list-inline-item"><a class="text-white" href="{% url 'contact_us' %}">About Us</a></li>
+      <li class="list-inline-item"><a class="text-white" href="{% url 'help' %}">Help</a></li>
     </ul>
   </footer>
 
