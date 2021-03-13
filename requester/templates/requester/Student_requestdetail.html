@@ -31,8 +31,7 @@
         {% for comment in object.comments.all %}
           <div class=" border border-primary rounded mb-2">
             <strong>
-              
-              {{ comment.author.profile.firstName }} {{comment.author.lecturerprofile.lastName}} - {{ comment.date_commented }}
+              {{ comment.author}} - {{ comment.date_commented }}
             </strong>
             </br>
             {{ comment.body|linebreaksbr }}
@@ -42,7 +41,7 @@
                   <div class="mx-3">
                     <hr> 
                     <strong>
-                      {{ reply.author.lecturerprofile.firstName }} {{reply.author.lecturerprofile.lastName}} - {{ reply.date_replied }}
+                      {{ reply.author}} - {{ reply.date_replied }}
                     </strong>
                     </br>
                     {{ reply.body|linebreaksbr }}

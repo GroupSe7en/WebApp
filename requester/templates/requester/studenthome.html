@@ -1,11 +1,5 @@
 {% extends "requester/base.html" %}
-{% load notifications_tags %}
-{% load static %}
 
-  {% block head %}
-    <script src="{% static 'notifications/notify.js' %}" type="text/javascript"></script>
-    {% register_notify_callbacks callbacks='fill_notification_list,fill_notification_badge' %}
-  {% endblock %}
   
   {% block content %}
   <div class="container-fluid">
@@ -21,28 +15,14 @@
             <input class="btn btn-info my-3" type="submit" value="Filter">
           </form>
           <hr class="my-4">
-          <h2>Notifications</h2>
-          <div class="nav flex-column">
-            {% live_notify_list %}
-          </div>
         </div>
       </nav>
 
       <main class="col-md-8 ms-sm-auto col-lg-10 px-md-4"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
         <div class="container">
           <div class="py-5 text-center">
-            <h1>Welcome Back {% ifequal user.groups.all.0|stringformat:"s" 'Student' %}
-              {{ user.studentprofile.firstName}} {{ user.studentprofile.lastName}}
-            {% endifequal %}
-            {% ifequal user.groups.all.0|stringformat:"s" 'Lecturer' %}
-              {{ user.lecturerprofile.firstName}} {{ user.lecturerprofile.lastName}}
-            {% endifequal %}!</h1>
-<<<<<<< HEAD
-           
-            <p class="lead">The request from other webapp members are shown below. You can read full details by clicking View details. If you want to sort your requests, please use below _______ . You can reply to the requests. To create a new request, select "New Request" from navigation panel. To go to your profile, select "Profile". To logout, select "Log Out". <br>Have a nice experience!</p>
-=======
+            <h1>Welcome Back {{ user }}</h1>
             <p class="lead">The request from other webapp members are shown below. You can read full details by clicking View details. If you want to sort your requests, please use the Filter Requests. You can reply to the requests. To create a new request, select "New Request" from navigation panel. To go to your profile, select "Profile". To logout, select "Log Out". <br>Have a nice experience!</p>
->>>>>>> 18e039b995abb84e4789885dc752630012755651
           </div>
           
           <div class="row">

@@ -1,3 +1,5 @@
+{% load notifications_tags %}
+{% load static %}
 <!doctype html>
 <html lang="en">
 
@@ -13,7 +15,8 @@
     <title> SE7EN </title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    {% block head %}{% endblock %}
+    <script src="{% static 'notifications/notify.js' %}" type="text/javascript"></script>
+    {% register_notify_callbacks callbacks='fill_notification_list,fill_notification_badge' %}
 
     <title>Requester</title>
     <style>
@@ -59,14 +62,30 @@
               <a class="nav-link text-reset" href="{% url 'request-create' %}">New Request</a>
             </li>
             {% endifequal %}
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle text-reset text-white" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Notifications
+                <span class="position-absolute top-1 start-0 translate-middle badge rounded-pill bg-primary">
+                  {% notifications_unread %}
+                </span>
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                {% if user.notifications.unread %}
+                  {% for notification in user.notifications.unread %}
+                  <li>
+                    <a class="dropdown-item" href="{% url 'request-detail' notification.action_object.id %}">
+                      {{ notification.actor }} {{ notification.verb }} {{ notification.action_object }} 
+                    </a>
+                  </li>
+                  {% endfor %}
+                {% endif %}
+              </ul>
+            </li>
             <li class="nav-item">
               <a class="nav-link text-reset" href="{% url 'requester-home' %}">Home</a>
             </li>
             <li class="nav-item">
               <a class="nav-link text-reset" href="{% url 'profile' %}" tabindex="-1" aria-disabled="true">Profile</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link text-reset" href="#">Notification</a>
             </li>
             <li class="nav-item">
               <a class="nav-link text-reset" href="{% url 'logout' %}">Log Out</a>

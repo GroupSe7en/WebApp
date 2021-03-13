@@ -40,7 +40,6 @@ def profile(request):
         }
 
         return render(request, 'users/studentprofile.html', context)
-<<<<<<< HEAD
 
 @login_required(login_url='login/')
 def logout_user(request):
@@ -48,5 +47,3 @@ def logout_user(request):
     qs.mark_all_as_read()
     logout(request)
     return render(request, 'users/logout.html')
-=======
->>>>>>> 18e039b995abb84e4789885dc752630012755651
