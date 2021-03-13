@@ -5,9 +5,10 @@ from users import views as user_views
 from django.conf import settings
 from django.conf.urls.static import static
 from requester.views import RequestListView
+import notifications.urls
 
 urlpatterns = [
-    path('logout/', auth_views.LogoutView.as_view(template_name='users/logout.html'), name='logout'),#logout view route
+    path('logout/', user_views.logout_user, name='logout'),#logout view route
     path('admin/', admin.site.urls),
     path('profile/', user_views.profile, name='profile'),
     path('requester/', include('requester.urls')),#adding requester app url config
@@ -25,6 +26,7 @@ urlpatterns = [
         name='password_change'),#password change route
     path('password-change-done/', auth_views.PasswordChangeDoneView.as_view(template_name='users/password_change_done.html'), 
         name='password_change_done'),#password change done route
+    path('^inbox/notifications/', include(notifications.urls, namespace='notifications')),
 ]
 
 if settings.DEBUG:

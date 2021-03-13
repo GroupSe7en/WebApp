@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from .models import StudentRequest, Comment, CommentReply
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 import django_filters 
-
+from notifications.signals import notify
 
 class StudentRequestFilterset(django_filters.FilterSet):
     class Meta:
@@ -124,9 +124,11 @@ class RequestReviewView(LoginRequiredMixin, UserPassesTestMixin, View):
       if (self.kwargs['review'] == 'accept'):
         studentrequest.accept_status = 'AC'
         studentrequest.save()
+        notify.send(self.request.user, recipient=studentrequest.author, verb='accepted your request', action_object=studentrequest, level="info")
       elif (self.kwargs['review'] == 'reject'):
         studentrequest.accept_status = 'RJ'
         studentrequest.save()
+        notify.send(self.request.user, recipient=studentrequest.author, verb='rejected your request', action_object=studentrequest, level="info")
       return True
     return False
 
@@ -166,3 +168,4 @@ class AddReplyView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     if (self.request.user == comment.studentrequest.author) or (self.request.user == comment.studentrequest.reciever):
       return True
     return False
+

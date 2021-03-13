@@ -1,7 +1,9 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import logout
 from django.contrib import messages
 from .forms import StudentProfileUpdateForm, LecturerProfileUpdateForm
+from notifications.signals import notify
 
 @login_required(login_url='login/')
 def profile(request):
@@ -38,4 +40,10 @@ def profile(request):
         }
 
         return render(request, 'users/studentprofile.html', context)
-    
+
+@login_required(login_url='login/')
+def logout_user(request):
+    qs = request.user.notifications.unread()
+    qs.mark_all_as_read()
+    logout(request)
+    return render(request, 'users/logout.html')

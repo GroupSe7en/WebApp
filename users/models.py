@@ -47,7 +47,10 @@ class CustomUser(AbstractUser):
     objects = CustomUserManager()
 
     def __str__(self):
-        return self.email
+        if (self.groups.filter(name='Lecturer').exists()):
+            return (self.lecturerprofile.firstName + " " + self.lecturerprofile.lastName)
+        elif (self.groups.filter(name='Student').exists()):
+            return (self.studentprofile.firstName + " " + self.studentprofile.lastName)
 
 class Profile(models.Model):
     
