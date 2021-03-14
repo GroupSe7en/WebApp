@@ -1,4 +1,4 @@
-from django.db.models.signals import post_save, m2m_changed
+from django.db.models.signals import m2m_changed
 from.models import CustomUser, StudentProfile, LecturerProfile
 from django.dispatch import receiver
 

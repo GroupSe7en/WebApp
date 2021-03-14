@@ -1,3 +1,5 @@
+{% load notifications_tags %}
+{% load static %}
 <!doctype html>
 <html lang="en">
 
@@ -12,7 +14,9 @@
     <link rel="shortcut icon" href="https://www.flaticon.com/svg/vstatic/svg/942/942744.svg?token=exp=1615479308~hmac=9f1e178fedd1df1ae02612ad4729ab2c" />
     <title> SE7EN </title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    {% block head %}{% endblock %}
+
+    <script src="{% static 'notifications/notify.js' %}" type="text/javascript"></script>
+    {% register_notify_callbacks callbacks='fill_notification_list,fill_notification_badge' %}
 
     <title>Requester</title>
     <style>
@@ -39,23 +43,34 @@
     {% endif %}
 
     <nav class="navbar fixed-top navbar-expand-sm navbar-dark">
-      <!-- <a class="navbar-brand" href="#">
-        <img src="https://utilitypeopleuk.com/wp-content/uploads/2017/06/twitter-icon-circle-blue-logo-preview.png" width="30" height="30" alt="">
-      </a> -->
       <div class="container-fluid">
         <a class="navbar-brand fw-bold text-white" href="{% url 'requester-home' %}">
-          {% ifequal user.groups.all.0|stringformat:"s" 'Student' %}
-            {{ user.studentprofile.firstName}} {{ user.studentprofile.lastName}}
-          {% endifequal %}
-          {% ifequal user.groups.all.0|stringformat:"s" 'Lecturer' %}
-            {{ user.lecturerprofile.firstName}} {{ user.lecturerprofile.lastName}}
-          {% endifequal %}
+            {{ user }}
         </a>
         <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
           <ul class="nav fw-bold text-white">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle text-reset text-white" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Notifications
+                <span class="position-absolute top-1 start-0 translate-middle badge rounded-pill bg-primary">
+                  {% notifications_unread %}
+                </span>
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                {% if user.notifications.unread %}
+                  {% for notification in user.notifications.unread %}
+                  <li>
+                    <a class="dropdown-item" href="{% url 'request-detail' notification.action_object.id %}">
+                      {{ notification.actor }} {{ notification.verb }} {{ notification.action_object }} 
+                    </a>
+                  </li>
+                  {% endfor %}
+                {% endif %}
+              </ul>
+            </li>
             {% ifequal user.groups.all.0|stringformat:"s" 'Student' %}
             <li class="nav-item">
               <a class="nav-link text-reset" href="{% url 'request-create' %}">New Request</a>
@@ -68,16 +83,13 @@
               <a class="nav-link text-reset" href="{% url 'profile' %}" tabindex="-1" aria-disabled="true">Profile</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link text-reset" href="#">Notification</a>
-            </li>
-            <li class="nav-item">
               <a class="nav-link text-reset" href="{% url 'logout' %}">Log Out</a>
             </li>
           </ul>
         </div>
       </div>
     </nav>
-
+    
     <div class="container-fluid background pt-2">
         {% block content %}{% endblock %}
     </div>

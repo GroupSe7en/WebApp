@@ -27,11 +27,7 @@
         {% for comment in object.comments.all %}
           <div class=" border border-primary rounded mb-2">
             <strong>
-              {% if comment.author.groups.all.0.name == "Lecturer" %}
-                {{ comment.author.lecturerprofile.firstName }} {{comment.author.lecturerprofile.lastName}} - {{ comment.date_commented }}
-              {% elif comment.author.groups.all.0.name == "Student"%}
-                {{ comment.author.studentprofile.firstName }} {{comment.author.studentprofile.lastName}} - {{ comment.date_commented }}
-              {% endif %}
+                {{ comment.author}} - {{ comment.date_commented }}
             </strong>
             </br>
             {{ comment.body|linebreaksbr }}
@@ -41,7 +37,7 @@
                   <div class="mx-3">
                     <hr> 
                     <strong>
-                      {{ reply.author.lecturerprofile.firstName }} {{reply.author.lecturerprofile.lastName}} - {{ reply.date_replied }}
+                      {{ reply.author}} - {{ reply.date_replied }}
                     </strong>
                     </br>
                     {{ reply.body|linebreaksbr }}

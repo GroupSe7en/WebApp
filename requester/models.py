@@ -19,13 +19,14 @@ class StudentRequest(models.Model):
         ('RJ', 'Rejected')
     ]
 
-    requestType = models.CharField(max_length=2, choices=TYPE_CHOICES)
-    title = models.CharField(max_length=100)
-    content = models.TextField()
+    requestType = models.CharField(max_length=2, choices=TYPE_CHOICES,  verbose_name="Type of the request")
+    title = models.CharField(max_length=100, verbose_name="Request Title")
+    content = models.TextField(verbose_name="Request Content")
     date_posted = models.DateTimeField(default=timezone.now)
-    author = models.ForeignKey(CustomUser, related_name="student_requests", on_delete=models.CASCADE)
-    reciever = models.ForeignKey(CustomUser, related_name="lecturer_requests", on_delete=models.CASCADE)
+    author = models.ForeignKey(CustomUser, related_name="student_requests", on_delete=models.CASCADE, limit_choices_to={'groups__name': 'Student'})
+    reciever = models.ForeignKey(CustomUser, related_name="lecturer_requests", on_delete=models.CASCADE,  verbose_name="Reciever", limit_choices_to={'groups__name': 'Lecturer'})
     accept_status = models.CharField(max_length=2, choices=ACCEPT_STATUS, default='PN')
+    attachments = models.FileField(upload_to="request_attachments", verbose_name="Attachments", blank=True ,null=True)
 
     def __str__(self):
         return self.title
@@ -37,7 +38,7 @@ class StudentRequest(models.Model):
 class Comment(models.Model):
     studentrequest = models.ForeignKey(StudentRequest, related_name="comments", on_delete=models.CASCADE)
     author =  models.ForeignKey(CustomUser, related_name="comment_author", on_delete=models.CASCADE)
-    body = models.TextField()
+    body = models.TextField(verbose_name="Comment")
     date_commented = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
@@ -49,7 +50,7 @@ class Comment(models.Model):
 class CommentReply(models.Model):
     comment = models.ForeignKey(Comment, related_name="replies", on_delete=models.CASCADE)
     author =  models.ForeignKey(CustomUser, related_name="reply_author", on_delete=models.CASCADE)
-    body = models.TextField()
+    body = models.TextField(verbose_name="Reply")
     date_replied = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
