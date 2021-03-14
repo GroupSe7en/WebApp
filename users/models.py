@@ -47,14 +47,19 @@ class CustomUser(AbstractUser):
     objects = CustomUserManager()
 
     def __str__(self):
-        return self.email
+        if (self.groups.filter(name='Lecturer').exists()):
+            return self.lecturerprofile.firstName + " " + self.lecturerprofile.lastName
+        elif (self.groups.filter(name='Student').exists()):
+            return self.studentprofile.firstName + " " + self.studentprofile.lastName
+        else:
+            return ""
 
 class Profile(models.Model):
     
-    firstName = models.CharField(max_length=50)
-    lastName = models.CharField(max_length=50)
+    firstName = models.CharField(max_length=50, verbose_name="First Name")
+    lastName = models.CharField(max_length=50, verbose_name="Last Name")
    
-    image = models.ImageField(default='defaultDP.jpg', upload_to='profile_pics')
+    image = models.ImageField(default='defaultDP.jpg', upload_to='profile_pics', verbose_name="Profile Picture")
 
     def __str__(self):
         return f'{self.user.email} Profile'
@@ -83,9 +88,9 @@ class StudentProfile(Profile):
     ]
 
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, related_name="studentprofile")
-    indexNo = models.CharField(max_length=7)
-    department = models.CharField(max_length=2, choices=DEPARTMENT_CHOICES)
-    contactNo = models.CharField(max_length=10)
+    indexNo = models.CharField(max_length=7, verbose_name="Index Number")
+    department = models.CharField(max_length=2, choices=DEPARTMENT_CHOICES, verbose_name="Department")
+    contactNo = models.CharField(max_length=10, verbose_name="Contact Number")
 
 class LecturerProfile(Profile):
     DEPARTMENT_CHOICES = [
@@ -101,4 +106,4 @@ class LecturerProfile(Profile):
     ]
 
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, related_name="lecturerprofile")
-    department = models.CharField(max_length=2, choices=DEPARTMENT_CHOICES)
+    department = models.CharField(max_length=2, choices=DEPARTMENT_CHOICES, verbose_name="Department")
