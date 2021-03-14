@@ -14,3 +14,7 @@ pip install django-notifications-hq
 
 gmail account - cse1962webapp@gmail.com
 psswrd - DQ$zJ,7}@`Z7Q-q$
+
+to do:
+1. attchments
+2. notifications new request
