@@ -5,6 +5,9 @@ student2@uom.lk     admin321
 student3@uom.lk     admin321
 lecturer1@uom.lk    admin321
 lecturer2@uom.lk    admin321
+chathurangajayanath@gmail.com     admin321
+supul9229kalhara@gmail.com        admin321
+
 
 #required libraries
 pip install django-crispy-forms
