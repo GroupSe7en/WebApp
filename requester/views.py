@@ -108,7 +108,7 @@ class RequestUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 class RequestDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
   model = StudentRequest
-  success_url = ""
+  success_url = "/"
 
   def test_func(self):
     request = self.get_object()

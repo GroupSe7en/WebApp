@@ -23,8 +23,8 @@ class StudentRequest(models.Model):
     title = models.CharField(max_length=100, verbose_name="Request Title")
     content = models.TextField(verbose_name="Request Content")
     date_posted = models.DateTimeField(default=timezone.now)
-    author = models.ForeignKey(CustomUser, related_name="student_requests", on_delete=models.CASCADE)
-    reciever = models.ForeignKey(CustomUser, related_name="lecturer_requests", on_delete=models.CASCADE,  verbose_name="Reciever")
+    author = models.ForeignKey(CustomUser, related_name="student_requests", on_delete=models.CASCADE, limit_choices_to={'groups__name': 'Student'})
+    reciever = models.ForeignKey(CustomUser, related_name="lecturer_requests", on_delete=models.CASCADE,  verbose_name="Reciever", limit_choices_to={'groups__name': 'Lecturer'})
     accept_status = models.CharField(max_length=2, choices=ACCEPT_STATUS, default='PN')
     attachments = models.FileField(upload_to="request_attachments", verbose_name="Attachments", blank=True ,null=True)
 
