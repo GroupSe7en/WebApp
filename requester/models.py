@@ -7,7 +7,7 @@ from django.urls import reverse
 class StudentRequest(models.Model):
 
     TYPE_CHOICES = [
-        ('SD', 'Extending Submission Deadline'),
+        ('SD', 'Extending Deadline'),
         ('LR', 'Leave Request'),
         ('RL', 'Rescheduling of a Lecture'),
         ('MR', 'Miscellaneous Request')
