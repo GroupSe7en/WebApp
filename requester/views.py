@@ -4,7 +4,8 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from .models import StudentRequest, Comment, CommentReply
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 import django_filters 
-
+from notifications.signals import notify
+from django.utils import timezone
 
 class StudentRequestFilterset(django_filters.FilterSet):
     class Meta:
@@ -76,7 +77,7 @@ class RequestDetailView(LoginRequiredMixin, DetailView):
 class RequestCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
 
   model = StudentRequest
-  fields = ['requestType', 'title', 'content', 'reciever']
+  fields = ['requestType', 'title', 'content', 'reciever', 'attachments']
 
   def form_valid(self, form):
     form.instance.author = self.request.user
@@ -107,7 +108,7 @@ class RequestUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 class RequestDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
   model = StudentRequest
-  success_url = ""
+  success_url = "/"
 
   def test_func(self):
     request = self.get_object()
@@ -124,9 +125,11 @@ class RequestReviewView(LoginRequiredMixin, UserPassesTestMixin, View):
       if (self.kwargs['review'] == 'accept'):
         studentrequest.accept_status = 'AC'
         studentrequest.save()
+        notify.send(self.request.user, recipient=studentrequest.author, verb='accepted', action_object=studentrequest, level="info", timestamp=timezone.now())
       elif (self.kwargs['review'] == 'reject'):
         studentrequest.accept_status = 'RJ'
         studentrequest.save()
+        notify.send(self.request.user, recipient=studentrequest.author, verb='rejected', action_object=studentrequest, level="info", timestamp=timezone.now())
       return True
     return False
 
@@ -142,6 +145,11 @@ class AddCommentView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
   def form_valid(self, form):
     form.instance.author = self.request.user
     form.instance.studentrequest = StudentRequest.objects.filter(id = self.kwargs['pk']).first()
+    if (self.request.user == form.instance.studentrequest.reciever):
+      comment_reciever = form.instance.studentrequest.author
+    else:
+      comment_reciever = form.instance.studentrequest.reciever
+    notify.send(form.instance.author, recipient=comment_reciever, verb='commented on', action_object=form.instance.studentrequest, level="info", timestamp=timezone.now())
     return super().form_valid(form)
   
   def test_func(self):
@@ -159,6 +167,11 @@ class AddReplyView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
   def form_valid(self, form):
     form.instance.author = self.request.user
     form.instance.comment = Comment.objects.filter(id = self.kwargs['commentpk']).first()
+    if (self.request.user == form.instance.comment.studentrequest.reciever):
+      reply_reciever = form.instance.comment.studentrequest.author
+    else:
+      reply_reciever = form.instance.comment.studentrequest.reciever
+    notify.send(form.instance.author, recipient=reply_reciever, verb='replied to comment on', action_object=form.instance.comment.studentrequest, level="info", timestamp=timezone.now())
     return super().form_valid(form)
   
   def test_func(self):
@@ -166,3 +179,4 @@ class AddReplyView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     if (self.request.user == comment.studentrequest.author) or (self.request.user == comment.studentrequest.reciever):
       return True
     return False
+
