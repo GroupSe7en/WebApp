@@ -3,7 +3,7 @@
 {% block content %}
 <div class='container'>
     <div>
-        <form class="container bg-white border border-white shadow p-3 bg-body rounded m-4 mx-auto" method="POST">
+        <form class="container bg-white border border-white shadow p-3 bg-body rounded m-4 mx-auto" method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             <fieldset class="form-group">
                 <legend class="border-bottom mb-4">New Request</legend>
