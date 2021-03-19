@@ -7,6 +7,7 @@ lecturer1@uom.lk    admin321
 lecturer2@uom.lk    admin321
 chathurangajayanath@gmail.com     admin321
 supul9229kalhara@gmail.com        admin321
+thillakarathnedilshan@gmail. com    admin321
 
 
 #required libraries
