@@ -2,3 +2,4 @@ Pipfile
 .vscode
 venv
 env
+workspace.code-workspace

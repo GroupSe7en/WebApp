@@ -3,7 +3,7 @@
 <html lang="en">
 
   <head>
-    <!-- <link rel="shortcut icon" href="https://www.flaticon.com/svg/vstatic/svg/942/942744.svg?token=exp=1615479807~hmac=dc1c6f50455e0dee43fecd31a9cfd986" /> -->
+    <link rel="shortcut icon" type="image/png" href="{{MEDIA_URL}}favicon.png">
     <title> SE7EN </title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -105,32 +105,26 @@
     </div>
 
     <br>
-    <div class="section section-we-do-presentation">
-      <div class="container">
-
-                  <div class="info-icon">
-                      <div class="icon">
-                          <i class="pe-7s-keypad text-danger"></i>
-                      </div>
-                      <h3>See Our Work</h3>
-                      <a type="button" class="btn btn-default btn-lg" href="https://github.com/GroupSe7en/WebApp.git">GitHub</a>
-                      
-                    
-                  </div>
+    <div class="section section-we-do-presentation mt-2">
+      <div class="d-flex justify-content-center">
+        <div class="info-icon">
+            <div class="icon">
+                <i class="pe-7s-keypad text-danger"></i>
+            </div>
+            <h3 class="text-center">See Our Work</h3>
+            <div class="d-flex justify-content-center">
+              <a type="button" class="btn btn-default btn-lg" href="https://github.com/GroupSe7en/WebApp.git">GitHub</a>
+            </div>
+        </div>
       </div>
   </div>
 
-  <div class="py-5 text-center">
-    <h1>Thank You for using My Requester!</h1>
-
-    <br>
-    <br>
+  <div class="py-3 text-center">
     <p>We give our best to share some good experience<br>
     please share us any problem that you had via<br>
     cse1962webapp@gmail.com<br>
-    <br>
   </p>
-  <p><a class="button" href="{% url 'contact_us' %}">About Us</a></p>
+  <p><a class="button mb-2" href="{% url 'contact_us' %}">About Us</a></p>
   </div>
   
 
