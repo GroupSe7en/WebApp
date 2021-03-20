@@ -179,4 +179,3 @@ class AddReplyView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     if (self.request.user == comment.studentrequest.author) or (self.request.user == comment.studentrequest.reciever):
       return True
     return False
-

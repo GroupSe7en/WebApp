@@ -1,13 +1,134 @@
-<html>
-   <link rel="shortcut icon" type="image/png" href="{{MEDIA_URL}}favicon.png">
- <head>
-  <title>Contact us</title>
- </head>
+{% load crispy_forms_tags %}
+<!doctype html>
+<html lang="en">
 
- <body>
-    <p>
+  <head>
+    <link rel="shortcut icon" type="image/png" href="{{MEDIA_URL}}favicon.png">
+    <title> SE7EN </title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    </p>
- </body>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
 
+    {% block head %}{% endblock %}
+
+    <title>Se7en</title>
+
+    <style>
+      .navbar {
+        background-color: #17a2b8;
+      }
+      .footer {
+        background-color: #17a2b8;
+      }
+      body {
+        background-color: #ffffff;
+      }
+
+.btn-circle,
+#to-top {
+  border-radius: 50%;
+  background: #111e6c;
+  padding: 6px;
+  font-size: 14px;
+  /* border-radius: 50%; */
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+  color: #fff;
+  text-align: center;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.c2a-btn {
+  margin: 48px auto 0;
+  margin: 4.8rem auto 0;
+}
+
+.btn-default {
+  color: #fff;
+  background-color: #111e6c;
+  border-color: #111e6c;
+  transition: all 1s ease;
+}
+
+.btn-group-lg > .btn,
+.btn-lg {
+  padding: 18px 28px;
+  font-size: 18px;
+  line-height: 1.3333333;
+  border-radius: 50px;
+}
+    </style>
+
+  </head>
+
+  <body class="pt-5">
+
+    {% if messages %}
+      <div class="alert alert-success" role="alert">
+      {% for message in messages %}
+          <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+      {% endfor %}
+      </div>
+    {% endif %}
+
+    <nav class="navbar fixed-top navbar-expand-sm navbar-dark">
+      <div class="container-fluid">
+        <a class="navbar-brand text-white" href="#">Se7en</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+        </div>
+      </div>
+    </nav>
+
+    <div class="container pt-4 bg-white border border-white shadow p-3 bg-body rounded m-4 mx-auto">
+      <div class="d-flex justify-content-center p-3 mx-auto">
+        <h2 class="text-center">Download user manual</h2>
+      </div>
+      <div class="d-flex justify-content-center p-3 mx-auto">
+          <div class="btn-group btn-group-lg" role="group" aria-label="Call to action">
+            <a class="btn btn-primary" " href="{{MEDIA_URL}}UserManual/UserManual.docx">Download User Manual</a>
+            <!-- <span class="btn-circle btn-or">or</span> -->
+            <a class="btn btn-dark" href="{% url 'requester-home' %}"> Back to Site </a>
+        </div>
+        
+      </div>
+    </div>
+
+    <br>
+    <div class="section section-we-do-presentation mt-2">
+      <div class="d-flex justify-content-center">
+        <div class="info-icon">
+            <div class="icon">
+                <i class="pe-7s-keypad text-danger"></i>
+            </div>
+            <h3 class="text-center">See Our Work</h3>
+            <div class="d-flex justify-content-center">
+              <a type="button" class="btn btn-default btn-lg" href="https://github.com/GroupSe7en/WebApp.git">GitHub</a>
+            </div>
+        </div>
+      </div>
+  </div>
+
+  <div class="py-3 text-center">
+    <p>We give our best to share some good experience<br>
+    please share us any problem that you had via<br>
+    cse1962webapp@gmail.com<br>
+  </p>
+  <p><a class="button mb-2" href="{% url 'contact_us' %}">About Us</a></p>
+  </div>
+  
+
+    <div class="container-fluid fixed-bottom footer">
+      <div class="row"></div>
+      <p class="mb-1 text-center text-white">A product by Group Se7en</p>
+      <p class="mb-1 text-center text-white">Officially deployed in 2021. </p>
+    </div>
+  </body>
 </html>
