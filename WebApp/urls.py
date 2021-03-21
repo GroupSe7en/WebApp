@@ -5,6 +5,7 @@ from users import views as user_views
 from django.conf import settings
 from django.conf.urls.static import static
 from requester.views import RequestListView
+from django.views.generic import TemplateView
 import notifications.urls
 
 urlpatterns = [
@@ -14,10 +15,9 @@ urlpatterns = [
     path('requester/', include('requester.urls')),#adding requester app url config
     path('', RequestListView.as_view(), name='requester-home'),#url to home page
     path('login/', auth_views.LoginView.as_view(template_name='users/login.html'), name='login'),#login view route
-    path('contact-us/', auth_views.PasswordResetView.as_view(template_name='users/contact.html'), 
+    path('contact-us/', user_views.AboutView.as_view(), 
         name='contact_us'),#contact us
-    path('help/', auth_views.PasswordResetView.as_view(template_name='users/help.html'), 
-        name='help'),#help
+    path('help/',user_views.HelpView.as_view(), name='help'),#help
     path('password-reset/', auth_views.PasswordResetView.as_view(template_name='users/password_reset.html'), 
         name='password_reset'),#password reset route
     path('password-reset/done', auth_views.PasswordResetDoneView.as_view(template_name='users/password_reset_done.html'), 

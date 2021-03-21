@@ -4,6 +4,7 @@ from django.contrib.auth import logout
 from django.contrib import messages
 from .forms import StudentProfileUpdateForm, LecturerProfileUpdateForm
 from notifications.signals import notify
+from django.views.generic import TemplateView
 
 @login_required(login_url='login/')
 def profile(request):
@@ -47,3 +48,9 @@ def logout_user(request):
     qs.mark_all_as_read()
     logout(request)
     return render(request, 'users/logout.html')
+
+class HelpView(TemplateView):
+    template_name = "users/help.html"
+
+class AboutView(TemplateView):
+    template_name = "users/contact.html"
